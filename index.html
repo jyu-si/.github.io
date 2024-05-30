@@ -5,21 +5,21 @@
   <title>タイトル</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <style>
-      body {
-        margin: 0;
-        overflow: hidden;
-      }
-      .button-container {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        z-index: 1;
-      }
-      button {
-        margin: 5px;
-        padding: 10px 20px;
-        font-size: 16px;
-      }
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    .button-container {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
   </style>  
 </head>
 <body>
@@ -28,7 +28,7 @@
       <button onclick="switchImage('afternoon')">２</button>
     </div>
   <a-scene>
-    <a-sky src="1214820_m.jpg" rotation="0 130 0"></a-sky>
+    <a-sky id="morning-image" src="1214820_m.jpg"></a-sky>
     <a-entity position="0 1.6 -2">
       <a-text value="Lab" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
     </a-entity>
@@ -40,7 +40,7 @@
 
     <script>
       function switchImage(time) {
-        var sky = document.getElementById('1214820_m.jpg');
+        var sky = document.getElementById('morning-image');
         if (time === 'morning') {
           sky.setAttribute('src', '#morning-image');
         } else if (time === 'afternoon') {
