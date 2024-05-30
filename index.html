@@ -23,11 +23,30 @@
   </style>  
 </head>
 <body>
+    <div class="button-container">
+      <button onclick="switchImage('morning')">１</button>
+      <button onclick="switchImage('afternoon')">２</button>
+    </div>
   <a-scene>
     <a-sky src="1214820_m.jpg" rotation="0 130 0"></a-sky>
     <a-entity position="0 1.6 -2">
       <a-text value="Lab" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
     </a-entity>
   </a-scene>
+      <!-- 朝の画像 -->
+    <img id="morning-image" src="morning.jpg" style="display:none">
+    <!-- 昼の画像 -->
+    <img id="afternoon-image" src="img-2 (1).jpg" style="display:none">
+
+    <script>
+      function switchImage(time) {
+        var sky = document.getElementById('1214820_m.jpg');
+        if (time === 'morning') {
+          sky.setAttribute('src', '#morning-image');
+        } else if (time === 'afternoon') {
+          sky.setAttribute('src', '#afternoon-image');
+        }
+      }
+    </script>
 </body>
 </html>
