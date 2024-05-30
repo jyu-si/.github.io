@@ -29,8 +29,8 @@
     </div>
   <a-scene>
     <a-sky id="image" src="#morning-image"></a-sky>
-    <a-entity position="0 1.6 -2">
-      <a-text value="Lab" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
+    <a-entity id="label" position="0 1.6 -2">
+      <a-text value="Lab1" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
     </a-entity>
   </a-scene>
       <!-- 朝の画像 -->
@@ -41,10 +41,13 @@
     <script>
       function switchImage(time) {
         var sky = document.getElementById('image');
+        var label = document.getElementById('label').childNodes[0]; // labelにあるa-textを取得
         if (time === 'morning') {
           sky.setAttribute('src', '#morning-image');
+          label.setAttribute('value', 'Lab1'); // Lab1に変更
         } else if (time === 'afternoon') {
           sky.setAttribute('src', '#afternoon-image');
+          label.setAttribute('value', 'Lab2'); // Lab2に変更
         }
       }
     </script>
