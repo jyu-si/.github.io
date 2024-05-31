@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>タイトル</title>
+  <title>testkita</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <style>
     body {
@@ -23,33 +23,38 @@
   </style>  
 </head>
 <body>
-    <div class="button-container">
-      <button onclick="switchImage('morning')">１</button>
-      <button onclick="switchImage('afternoon')">２</button>
-    </div>
+  <div class="button-container">
+    <button onclick="switchImage('morning')">１</button>
+    <button onclick="switchImage('afternoon')">２</button>
+    <button onclick="goToURL()">ニュース</button> <!-- 新しいボタンを追加 -->
+  </div>
   <a-scene>
     <a-sky id="image" src="#morning-image"></a-sky>
     <a-entity position="0 1.6 -2">
       <a-text id="label-text" value="Lab1" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
     </a-entity>
   </a-scene>
-      <!-- 朝の画像 -->
-    <img id="morning-image" src="1214820_m.jpg" style="display:none">
-    <!-- 昼の画像 -->
-    <img id="afternoon-image" src="img-2 (1).jpg" style="display:none">
+  <!-- 朝の画像 -->
+  <img id="morning-image" src="1214820_m.jpg" style="display:none">
+  <!-- 昼の画像 -->
+  <img id="afternoon-image" src="img-2 (1).jpg" style="display:none">
 
-    <script>
-      function switchImage(time) {
-        var sky = document.getElementById('image');
-        var labelText = document.getElementById('label-text'); // 直接a-textのidを使用
-        if (time === 'morning') {
-          sky.setAttribute('src', '#morning-image');
-          labelText.setAttribute('value', 'Lab1'); // Lab1に変更
-        } else if (time === 'afternoon') {
-          sky.setAttribute('src', '#afternoon-image');
-          labelText.setAttribute('value', 'Lab2'); // Lab2に変更
-        }
+  <script>
+    function switchImage(time) {
+      var sky = document.getElementById('image');
+      var labelText = document.getElementById('label-text'); // 直接a-textのidを使用
+      if (time === 'morning') {
+        sky.setAttribute('src', '#morning-image');
+        labelText.setAttribute('value', 'Lab1'); // Lab1に変更
+      } else if (time === 'afternoon') {
+        sky.setAttribute('src', '#afternoon-image');
+        labelText.setAttribute('value', 'Lab2'); // Lab2に変更
       }
-    </script>
+    }
+
+    function goToURL() {
+      window.location.href = "https://news.mynavi.jp/article/20230130-2561235/";
+    }
+  </script>
 </body>
 </html>
