@@ -9,24 +9,52 @@
       margin: 0;
       overflow: hidden;
     }
+    /* ボタンのコンテナを左上に固定 */
     .button-container {
       position: absolute;
       top: 10px;
       left: 10px;
       z-index: 1;
+      display: flex;
+      flex-direction: column;
     }
-    button {
+    /* 切り替えボタンのスタイル */
+    .switch-button {
       margin: 5px;
       padding: 10px 20px;
       font-size: 16px;
+      background-color: #4CAF50; /* 緑色 */
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .switch-button:hover {
+      background-color: #45a049; /* ホバー時の色 */
+    }
+    /* URLボタンのスタイル */
+    .url-button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #008CBA; /* 青色 */
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .url-button:hover {
+      background-color: #007bb5; /* ホバー時の色 */
     }
   </style>  
 </head>
 <body>
   <div class="button-container">
-    <button onclick="switchImage('morning')">１</button>
-    <button onclick="switchImage('afternoon')">２</button>
-    <button onclick="goToURL()">富田林市</button> <!-- 新しいボタンを追加 -->
+    <!-- 切り替えボタンには switch-button クラスを適用 -->
+    <button class="switch-button" onclick="switchImage('morning')">１</button>
+    <button class="switch-button" onclick="switchImage('afternoon')">２</button>
+    <!-- URLボタンには url-button クラスを適用 -->
+    <button class="url-button" onclick="goToURL()">富田林市</button>
   </div>
   <a-scene>
     <a-sky id="image" src="#morning-image"></a-sky>
@@ -35,7 +63,7 @@
     </a-entity>
   </a-scene>
   <!-- 朝の画像 -->
-  <img id="morning-image" src="1214820_m.jpg" style="display:none">
+  <img id="morning-image" src="/mnt/data/S__13697186.jpg" style="display:none">
   <!-- 昼の画像 -->
   <img id="afternoon-image" src="img-2 (1).jpg" style="display:none">
 
