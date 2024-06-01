@@ -57,6 +57,11 @@
     <button class="url-button" onclick="goToURL()">富田林市</button>
   </div>
   <a-scene>
+    <a-assets>
+      <!-- アセットとして画像を定義 -->
+      <img id="morning-image" src="1214820_m.jpg">
+      <img id="afternoon-image" src="img-2 (1).jpg">
+    </a-assets>
     <a-sky id="image" src="#morning-image"></a-sky>
     <a-entity position="0 1.6 -2">
       <a-text id="label-text" value="Lab1" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
