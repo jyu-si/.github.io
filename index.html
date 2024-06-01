@@ -57,36 +57,39 @@
     <button class="url-button" onclick="goToURL()">富田林市</button>
   </div>
   <a-scene>
-    <a-assets>
-      <!-- アセットとして画像を定義 -->
-      <img id="morning-image" src="1214820_m.jpg">
-      <img id="afternoon-image" src="img-2 (1).jpg">
-    </a-assets>
     <a-sky id="image" src="#morning-image"></a-sky>
     <a-entity position="0 1.6 -2">
       <a-text id="label-text" value="Lab1" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
     </a-entity>
   </a-scene>
   <!-- 朝の画像 -->
-  <img id="morning-image" src="1214820_m.jpg" style="display:none">
+  <img id="morning-image" src="/mnt/data/S__13697186.jpg" style="display:none">
   <!-- 昼の画像 -->
   <img id="afternoon-image" src="img-2 (1).jpg" style="display:none">
 
   <script>
+    var currentImage = 'morning'; // 現在の画像を追跡する変数
+
     function switchImage(time) {
       var sky = document.getElementById('image');
       var labelText = document.getElementById('label-text'); // 直接a-textのidを使用
       if (time === 'morning') {
         sky.setAttribute('src', '#morning-image');
         labelText.setAttribute('value', 'Lab1'); // Lab1に変更
+        currentImage = 'morning'; // 現在の画像を更新
       } else if (time === 'afternoon') {
         sky.setAttribute('src', '#afternoon-image');
         labelText.setAttribute('value', 'Lab2'); // Lab2に変更
+        currentImage = 'afternoon'; // 現在の画像を更新
       }
     }
 
     function goToURL() {
-      window.location.href = "https://www.city.tondabayashi.lg.jp/";
+      if (currentImage === 'morning') {
+        window.location.href = "https://www.city.tondabayashi.lg.jp/";
+      } else if (currentImage === 'afternoon') {
+        window.location.href = "https://www.wakayama-u.ac.jp/";
+      }
     }
   </script>
 </body>
