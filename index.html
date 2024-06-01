@@ -9,7 +9,6 @@
       margin: 0;
       overflow: hidden;
     }
-    /* ボタンのコンテナを左上に固定 */
     .button-container {
       position: absolute;
       top: 10px;
@@ -18,42 +17,42 @@
       display: flex;
       flex-direction: column;
     }
-    /* 切り替えボタンのスタイル */
     .switch-button {
       margin: 5px;
       padding: 10px 20px;
       font-size: 16px;
-      background-color: #4CAF50; /* 緑色 */
+      background-color: #4CAF50;
       color: white;
       border: none;
       cursor: pointer;
       border-radius: 5px;
     }
     .switch-button:hover {
-      background-color: #45a049; /* ホバー時の色 */
+      background-color: #45a049;
     }
-    /* URLボタンのスタイル */
     .url-button {
       margin: 5px;
       padding: 10px 20px;
       font-size: 16px;
-      background-color: #008CBA; /* 青色 */
+      background-color: #008CBA;
       color: white;
       border: none;
       cursor: pointer;
       border-radius: 5px;
     }
     .url-button:hover {
-      background-color: #007bb5; /* ホバー時の色 */
+      background-color: #007bb5;
     }
   </style>  
 </head>
 <body>
   <div class="button-container">
-    <!-- 切り替えボタンには switch-button クラスを適用 -->
     <button class="switch-button" onclick="switchImage('matunobe')">松</button>
     <button class="switch-button" onclick="switchImage('harada')">原</button>
-    <!-- URLボタンには url-button クラスを適用 -->
+    <!-- 新しい画像のボタン -->
+    <button class="switch-button" onclick="switchImage('imai')">今</button>
+    <button class="switch-button" onclick="switchImage('kawasumi')">川</button>
+    <!-- URLボタン -->
     <button class="url-button" onclick="goToURL()">ホームページ</button>
   </div>
   <a-scene>
@@ -62,33 +61,58 @@
       <a-text id="label-text" value="Lab1" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
     </a-entity>
   </a-scene>
-  <!-- 朝の画像 -->
+  <!-- 画像 -->
   <img id="matunobe-image" src="1214820_m.jpg" style="display:none">
-  <!-- 昼の画像 -->
   <img id="harada-image" src="img-2 (1).jpg" style="display:none">
+  <img id="imai-image" src="27692040_s.jpg" style="display:none">
+  <img id="kawasumi-image" src="MDS_カテゴリ_page-0001.jpg" style="display:none">
 
   <script>
-    var currentImage = 'matunobe'; // 現在の画像を追跡する変数
+    var currentImage = 'matunobe';
 
     function switchImage(time) {
       var sky = document.getElementById('image');
-      var labelText = document.getElementById('label-text'); // 直接a-textのidを使用
-      if (time === 'matunobe') {
-        sky.setAttribute('src', '#matunobe-image');
-        labelText.setAttribute('value', 'Lab1'); // Lab1に変更
-        currentImage = 'matunobe'; // 現在の画像を更新
-      } else if (time === 'harada') {
-        sky.setAttribute('src', '#harada-image');
-        labelText.setAttribute('value', 'Lab2'); // Lab2に変更
-        currentImage = 'harada'; // 現在の画像を更新
+      var labelText = document.getElementById('label-text');
+      switch (time) {
+        case 'matunobe':
+          sky.setAttribute('src', '#matunobe-image');
+          labelText.setAttribute('value', 'Lab1');
+          currentImage = 'matunobe';
+          break;
+        case 'harada':
+          sky.setAttribute('src', '#harada-image');
+          labelText.setAttribute('value', 'Lab2');
+          currentImage = 'harada';
+          break;
+        // 新しい画像の条件分岐
+        case 'imai':
+          sky.setAttribute('src', '#imai-image');
+          labelText.setAttribute('value', 'Lab3');
+          currentImage = 'imai';
+          break;
+        case 'kawasumi':
+          sky.setAttribute('src', '#kawasumi-image');
+          labelText.setAttribute('value', 'Lab4');
+          currentImage = 'kawasumi';
+          break;
       }
     }
 
     function goToURL() {
-      if (currentImage === 'matunobe') {
-        window.location.href = "https://www.city.tondabayashi.lg.jp/";
-      } else if (currentImage === 'harada') {
-        window.location.href = "https://www.wakayama-u.ac.jp/";
+      switch (currentImage) {
+        case 'matunobe':
+          window.location.href = "https://www.city.tondabayashi.lg.jp/";
+          break;
+        case 'harada':
+          window.location.href = "https://www.wakayama-u.ac.jp/";
+          break;
+        // 新しいURLの条件分岐
+        case 'imai':
+          window.location.href = "https://researchers.center.wakayama-u.ac.jp/html/100000632_ja.html";
+          break;
+        case 'kawasumi':
+          window.location.href = "https://sites.google.com/g.wakayama-u.jp/spacedesignlab/";
+          break;
       }
     }
   </script>
