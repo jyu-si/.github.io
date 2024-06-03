@@ -46,15 +46,7 @@
   </style>  
 </head>
 <body>
-  <div class="button-container">
-    <button class="switch-button" onclick="switchImage('matunobe')">松延</button>
-    <button class="switch-button" onclick="switchImage('harada')">原田</button>
-    <button class="switch-button" onclick="switchImage('imai')">今井</button>
-    <button class="switch-button" onclick="switchImage('kawasumi')">川隅</button>
-    <!-- 新しい画像のボタン -->
-    <button class="switch-button" onclick="switchImage('tokoi')">床井</button>
-    <button class="switch-button" onclick="switchImage('nisimura')">西村</button>
-    <!-- URLボタン -->
+  <div class="button-container" id="button-container">
     <button class="url-button" onclick="goToURL()">ホームページ</button>
   </div>
   <a-scene>
@@ -63,73 +55,58 @@
       <a-text id="label-text" value="Lab1" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
     </a-entity>
   </a-scene>
-  <!-- 画像 -->
-  <img id="matunobe-image" src="1214820_m.jpg" style="display:none">
-  <img id="harada-image" src="2.jpg" style="display:none">
-  <img id="imai-image" src="27692040_s.jpg" style="display:none">
-  <img id="kawasumi-image" src="3.jpg" style="display:none">
-  <img id="tokoi-image" src="27736087_s.jpg" style="display:none">
-  <img id="nisimura-image" src="23992391_s.jpg" style="display:none">
 
   <script>
     var currentImage = 'matunobe';
-    function switchImage(time) {
-      var sky = document.getElementById('image');
-      var labelText = document.getElementById('label-text');
-      switch (time) {
-        case 'matunobe':
-          sky.setAttribute('src', '#matunobe-image');
-          labelText.setAttribute('value', 'Lab1');
-          currentImage = 'matunobe';
-          break;
-        case 'harada':
-          sky.setAttribute('src', '#harada-image');
-          labelText.setAttribute('value', 'Lab2');
-          currentImage = 'harada';
-          break;
-        case 'imai':
-          sky.setAttribute('src', '#imai-image');
-          labelText.setAttribute('value', 'Lab3');
-          currentImage = 'imai';
-          break;
-        case 'kawasumi':
-          sky.setAttribute('src', '#kawasumi-image');
-          labelText.setAttribute('value', 'Lab4');
-          currentImage = 'kawasumi';
-          break;
-        case 'tokoi':
-          sky.setAttribute('src', '#tokoi-image');
-          labelText.setAttribute('value', 'Lab5');
-          currentImage = 'tokoi';
-          break;
-        case 'nisimura':
-          sky.setAttribute('src', '#nisimura-image');
-          labelText.setAttribute('value', 'Lab6');
-          currentImage = 'nisimura';
-          break;
+    var imageData = {};
+
+    // JSONデータを読み込む
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        imageData = data.images;
+        setupButtons();
+        loadImage('matunobe');
+      });
+
+    function setupButtons() {
+      var buttonContainer = document.getElementById('button-container');
+      imageData.forEach(image => {
+        var button = document.createElement('button');
+        button.className = 'switch-button';
+        button.innerText = image.id;
+        button.onclick = () => switchImage(image.id);
+        buttonContainer.insertBefore(button, buttonContainer.firstChild);
+      });
+    }
+
+    function switchImage(id) {
+      var image = imageData.find(img => img.id === id);
+      if (image) {
+        var sky = document.getElementById('image');
+        var labelText = document.getElementById('label-text');
+        sky.setAttribute('src', '#' + image.id + '-image');
+        labelText.setAttribute('value', image.label);
+        currentImage = id;
+      }
+    }
+
+    function loadImage(id) {
+      var image = imageData.find(img => img.id === id);
+      if (image) {
+        var aScene = document.querySelector('a-scene');
+        var imgElement = document.createElement('img');
+        imgElement.id = id + '-image';
+        imgElement.src = image.src;
+        imgElement.style.display = 'none';
+        aScene.appendChild(imgElement);
       }
     }
 
     function goToURL() {
-      switch (currentImage) {
-        case 'matunobe':
-          window.location.href = "https://www.city.tondabayashi.lg.jp/";
-          break;
-        case 'harada':
-          window.location.href = "https://www.wakayama-u.ac.jp/";
-          break;
-        case 'imai':
-          window.location.href = "https://researchers.center.wakayama-u.ac.jp/html/100000632_ja.html";
-          break;
-        case 'kawasumi':
-          window.location.href = "https://sites.google.com/g.wakayama-u.jp/spacedesignlab/";
-          break;
-        case 'tokoi':
-          window.location.href = "https://marina.sys.wakayama-u.ac.jp/~tokoi/";
-          break;
-        case 'nisimura':
-          window.location.href = "https://mdi-lab.sys.wakayama-u.ac.jp/";
-          break;
+      var image = imageData.find(img => img.id === currentImage);
+      if (image) {
+        window.location.href = image.url;
       }
     }
   </script>
