@@ -43,7 +43,7 @@
     .url-button:hover {
       background-color: #007bb5;
     }
-  </style>  
+  </style>
 </head>
 <body>
   <div class="button-container" id="button-container">
@@ -55,10 +55,9 @@
       <a-text id="label-text" value="Lab1" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
     </a-entity>
   </a-scene>
-
   <script>
     var currentImage = 'matunobe';
-    var imageData = {};
+    var imageData = [];
 
     // JSONデータを読み込む
     fetch('data.json')
