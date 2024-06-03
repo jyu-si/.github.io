@@ -61,11 +61,20 @@
 
     // JSONデータを読み込む
     fetch('data.json')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
       .then(data => {
         imageData = data.images;
+        console.log('JSON data loaded:', imageData); // デバッグ用
         setupButtons();
         loadImage('matunobe');
+      })
+      .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
       });
 
     function setupButtons() {
@@ -76,6 +85,7 @@
         button.innerText = image.id;
         button.onclick = () => switchImage(image.id);
         buttonContainer.insertBefore(button, buttonContainer.firstChild);
+        console.log('Button created for:', image.id); // デバッグ用
       });
     }
 
@@ -99,6 +109,7 @@
         imgElement.src = image.src;
         imgElement.style.display = 'none';
         aScene.appendChild(imgElement);
+        console.log('Image loaded:', id); // デバッグ用
       }
     }
 
