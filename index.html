@@ -49,9 +49,11 @@
   <div class="button-container">
     <button class="switch-button" onclick="switchImage('matunobe')">松延</button>
     <button class="switch-button" onclick="switchImage('harada')">原田</button>
-    <!-- 新しい画像のボタン -->
     <button class="switch-button" onclick="switchImage('imai')">今井</button>
     <button class="switch-button" onclick="switchImage('kawasumi')">川隅</button>
+    <!-- 新しい画像のボタン -->
+    <button class="switch-button" onclick="switchImage('tokoi')">床井</button>
+    <button class="switch-button" onclick="switchImage('nisimura')">西村</button>
     <!-- URLボタン -->
     <button class="url-button" onclick="goToURL()">ホームページ</button>
   </div>
@@ -66,6 +68,8 @@
   <img id="harada-image" src="2.jpg" style="display:none">
   <img id="imai-image" src="27692040_s.jpg" style="display:none">
   <img id="kawasumi-image" src="3.jpg" style="display:none">
+  <img id="tokoi-image" src="27736087_s.jpg" style="display:none">
+  <img id="nisimura-image" src="23992391_s.jpg" style="display:none">
 
   <script>
     var currentImage = 'matunobe';
@@ -83,7 +87,6 @@
           labelText.setAttribute('value', 'Lab2');
           currentImage = 'harada';
           break;
-        // 新しい画像の条件分岐
         case 'imai':
           sky.setAttribute('src', '#imai-image');
           labelText.setAttribute('value', 'Lab3');
@@ -93,6 +96,16 @@
           sky.setAttribute('src', '#kawasumi-image');
           labelText.setAttribute('value', 'Lab4');
           currentImage = 'kawasumi';
+          break;
+        case 'tokoi':
+          sky.setAttribute('src', '#tokoi-image');
+          labelText.setAttribute('value', 'Lab5');
+          currentImage = 'tokoi';
+          break;
+        case 'nisimura':
+          sky.setAttribute('src', '#nisimura-image');
+          labelText.setAttribute('value', 'Lab6');
+          currentImage = 'nisimura';
           break;
       }
     }
@@ -105,12 +118,17 @@
         case 'harada':
           window.location.href = "https://www.wakayama-u.ac.jp/";
           break;
-        // 新しいURLの条件分岐
         case 'imai':
           window.location.href = "https://researchers.center.wakayama-u.ac.jp/html/100000632_ja.html";
           break;
         case 'kawasumi':
           window.location.href = "https://sites.google.com/g.wakayama-u.jp/spacedesignlab/";
+          break;
+        case 'tokoi':
+          window.location.href = "https://marina.sys.wakayama-u.ac.jp/~tokoi/";
+          break;
+        case 'nisimura':
+          window.location.href = "https://mdi-lab.sys.wakayama-u.ac.jp/";
           break;
       }
     }
