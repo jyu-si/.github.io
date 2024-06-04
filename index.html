@@ -94,7 +94,7 @@
       if (image) {
         var sky = document.getElementById('image');
         var labelText = document.getElementById('label-text');
-        sky.setAttribute('src', '#' + image.id + '-image');
+        sky.setAttribute('src', image.src); // Use the direct source path
         labelText.setAttribute('value', image.label);
         currentImage = id;
       }
@@ -103,12 +103,10 @@
     function loadImage(id) {
       var image = imageData.find(img => img.id === id);
       if (image) {
-        var aScene = document.querySelector('a-scene');
-        var imgElement = document.createElement('img');
-        imgElement.id = id + '-image';
-        imgElement.src = image.src;
-        imgElement.style.display = 'none';
-        aScene.appendChild(imgElement);
+        var sky = document.getElementById('image');
+        var labelText = document.getElementById('label-text');
+        sky.setAttribute('src', image.src); // Use the direct source path
+        labelText.setAttribute('value', image.label);
         console.log('Image loaded:', id); // デバッグ用
       }
     }
