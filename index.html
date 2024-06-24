@@ -1,60 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>testkita</title>
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-    }
-    .button-container {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .switch-button {
-      margin: 5px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .switch-button:hover {
-      background-color: #45a049;
-    }
-    .url-button {
-      margin: 5px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #008CBA;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .url-button:hover {
-      background-color: #007bb5;
-    }
-  </style>
-</head>
-<body>
-  <div class="button-container" id="button-container">
-    <button class="url-button" onclick="goToURL()">ホームページ</button>
-  </div>
-  <a-scene>
-    <a-sky id="image" src="#matunobe-image"></a-sky>
-    <a-entity position="0 1.6 -2">
-      <a-text id="label-text" value="Lab1" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
-    </a-entity>
-  </a-scene>
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="UTF-8"> 
+<title>testkita</title> 
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script> 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- 追加 -->
+<style> 
+/* 既存のスタイル */
+</style> 
+</head> 
+<body> 
+<div class="content"> 
+<section> 
+<div class="btn-trigger" id="btn05"> 
+<span></span> 
+<span></span> 
+<span></span> 
+</div> 
+</section> 
+<p class="_a"><a href="https://125naroom.com/web/2958" target="_blank" class="link">View the note</a></p> 
+<nav id="navArea"> <!-- 変更 -->
+<div class="inner"> 
+<ul> 
+<li><a href="#">Text</a></li> 
+<li><a href="#">Text</a></li> 
+<li><a href="#">Text</a></li> 
+</ul> 
+</div> 
+</nav> 
+<div class="toggle_btn"> 
+<span></span> 
+<span></span> 
+<span></span> 
+</div> 
+<div id="mask"></div> 
+</div> 
   <script>
     var currentImage = 'matunobe';
     var imageData = [];
