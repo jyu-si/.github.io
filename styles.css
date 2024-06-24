@@ -147,8 +147,9 @@ nav .inner ul li a:hover {
 }
 
 #mask {
-  display: none;
-  transition: all .5s;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .5s, visibility 0s .5s;
   position: fixed;
   top: 0;
   left: 0;
@@ -160,5 +161,8 @@ nav .inner ul li a:hover {
 }
 
 .open #mask {
-  display: block;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .5s, visibility 0s;
 }
+
