@@ -7,31 +7,18 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <!-- ハンバーガーボタン -->
-  <div class="toggle_btn" id="toggle-btn">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+ window.onload = function () {
+    var nav = document.getElementById('nav-wrapper');
+    var hamburger = document.getElementById('js-hamburger');
+    var blackBg = document.getElementById('js-black-bg');
 
-  <!-- ナビゲーションメニュー -->
-<nav id="nav">
-  <div class="inner">
-    <ul>
-      <li><a href="https://www.city.tondabayashi.lg.jp/" target="_blank">ホーム</a></li>
-      <li><a href="https://www.wakayama-u.ac.jp/" target="_blank">アバウト</a></li>
-      <li><a href="https://researchers.center.wakayama-u.ac.jp/html/100000632_ja.html" target="_blank">コンタクト</a></li>
-    </ul>
-  </div>
-</nav>
-
-
-  <!-- マスク -->
-  <div id="mask"></div>
-
-  <div class="button-container" id="button-container">
-    <button class="url-button" onclick="goToURL()">ホームページ</button>
-  </div>
+    hamburger.addEventListener('click', function () {
+        nav.classList.toggle('open');
+    });
+    blackBg.addEventListener('click', function () {
+        nav.classList.remove('open');
+    });
+};
   <a-scene>
     <a-sky id="image" src="#matunobe-image"></a-sky>
     <a-entity position="0 1.6 -2">
@@ -101,24 +88,7 @@
       }
     }
 
-    // ハンバーガーメニューの開閉動作
-    document.addEventListener('DOMContentLoaded', function() {
-      var toggleBtn = document.getElementById('toggle-btn');
-      var nav = document.getElementById('nav');
-      var mask = document.getElementById('mask');
-
-      toggleBtn.addEventListener('click', function() {
-        nav.classList.toggle('open');
-        toggleBtn.classList.toggle('open');
-        mask.classList.toggle('open');
-      });
-
-      mask.addEventListener('click', function() {
-        nav.classList.remove('open');
-        toggleBtn.classList.remove('open');
-        mask.classList.remove('open');
-      });
-    });
+   
   </script>
 </body>
 </html>
