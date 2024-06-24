@@ -44,125 +44,96 @@ body {
   background-color: #007bb5;
 }
 
-/* ハンバーガーメニューのスタイル */
-.toggle_btn {
-  display: block;
-  position: fixed;
-  top: 30px;
-  right: 30px;
-  width: 30px;
-  height: 30px;
-  transition: all .5s;
-  cursor: pointer;
-  z-index: 3;
-}
-
-.toggle_btn span {
-  display: block;
+/* 
+hamburger(ハンバーガーアイコン)
+=================================== */
+.hamburger {
   position: absolute;
-  left: 0;
-  width: 30px;
-  height: 2px;
-  background-color: #333;
-  border-radius: 4px;
-  transition: all .5s;
-}
-
-.toggle_btn span:nth-child(1) {
-  top: 4px;
-}
-
-.toggle_btn span:nth-child(2) {
-  top: 14px;
-}
-
-.toggle_btn span:nth-child(3) {
-  bottom: 4px;
-}
-
-.open .toggle_btn span {
-  background-color: #fff;
-}
-
-.open .toggle_btn span:nth-child(1) {
-  transform: translateY(10px) rotate(-315deg);
-}
-
-.open .toggle_btn span:nth-child(2) {
-  opacity: 0;
-}
-
-.open .toggle_btn span:nth-child(3) {
-  transform: translateY(-10px) rotate(315deg);
-}
-
-nav {
-  display: block;
-  position: fixed;
-  top: 0;
-  left: -300px;
-  bottom: 0;
-  width: 300px;
-  background: #ffffff;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  transition: all .5s;
-  z-index: 3;
-  opacity: 0;
-}
-
-.open nav {
-  left: 0;
-  opacity: 1;
-}
-
-nav .inner {
-  padding: 25px;
-}
-
-nav .inner ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav .inner ul li {
-  position: relative;
-  margin: 0;
-  border-bottom: 1px solid #333;
-}
-
-nav .inner ul li a {
-  display: block;
-  color: #333;
-  font-size: 14px;
-  padding: 1em;
-  text-decoration: none;
-  transition-duration: 0.2s;
-}
-
-nav .inner ul li a:hover {
-  background: #e4e4e4;
-}
-
-#mask {
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity .5s, visibility 0s .5s;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 2;
+  right: 20px;
+  top: 20px;
+  width: 50px;
+  height: 40px;
   cursor: pointer;
+  z-index: 300;
 }
 
-.open #mask {
+.hamburger__line {
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  right: 0;
+  background-color: #000;
+  transition: all 0.5s;
+}
+
+.hamburger__line--1 {
+  top: 1px;
+}
+
+.hamburger__line--2 {
+  top: 18px;
+}
+
+.hamburger__line--3 {
+  top: 36px;
+}
+
+/*ハンバーガーがクリックされたら*/
+.open .hamburger__line--1 {
+  transform: rotate(-45deg);
+  top: 11px;
+}
+
+.open .hamburger__line--2 {
+  opacity: 0;
+}
+
+.open .hamburger__line--3 {
+  transform: rotate(45deg);
+  top: 11px;
+}
+
+/* 
+sp-nav(ナビ)
+=================================== */
+.sp-nav {
+  position: fixed;
+  right: -100%; /*ハンバーガーがクリックされる前はWindow右側に隠す*/
+  top: 0;
+  width: 70%; /* 出てくるスライドメニューの幅 */
+  height: 100vh;
+  background-color: #fff;
+  transition: all 0.5s;
+  z-index: 200;
+  overflow-y: auto; /* メニューが多くなったらスクロールできるように */
+}
+
+/*ハンバーガーがクリックされたら右からスライド*/
+.open .sp-nav {
+  right: 0;
+}
+
+
+/* 
+black-bg(ハンバーガーメニュー解除用bg)
+=================================== */
+.black-bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  background-color: #000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s;
+  cursor: pointer;
+  z-index: 100;
+}
+
+/*ハンバーガーメニューが開いたら表示*/
+.open .black-bg {
+  opacity: 0.3;
   visibility: visible;
-  opacity: 1;
-  transition: opacity .5s, visibility 0s;
 }
-
