@@ -36,21 +36,23 @@
     <div id="mask"></div>
   </div>
 
+
+<script>
+  $(document).ready(function() {
+    $('.toggle_btn').click(function() {
+      $('#navArea').toggleClass('open');
+      $('#mask').toggleClass('open');
+      $(this).toggleClass('open');
+    });
+
+    $('#mask').click(function() {
+      $('#navArea').removeClass('open');
+      $(this).removeClass('open');
+      $('.toggle_btn').removeClass('open');
+    });
+  });
+</script>
   <script>
-    $(document).ready(function() {
-      // ハンバーガーメニューのトグル
-      $('.toggle_btn').click(function() {
-        $('#navArea').toggleClass('open');
-        $('#mask').toggleClass('open');
-        $(this).toggleClass('open');
-      });
-
-      $('#mask').click(function() {
-        $('#navArea').removeClass('open');
-        $(this).removeClass('open');
-        $('.toggle_btn').removeClass('open');
-      });
-
       // JSONデータを読み込む
       fetch('data.json')
         .then(response => {
