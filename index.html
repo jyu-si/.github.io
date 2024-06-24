@@ -1,61 +1,77 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
-<meta charset="UTF-8"> 
-<title>testkita</title> 
-<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script> 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- 追加 -->
-<style> 
-/* 既存のスタイル */
-</style> 
-</head> 
-<body> 
-<div class="content"> 
-<section> 
-<div class="btn-trigger" id="btn05"> 
-<span></span> 
-<span></span> 
-<span></span> 
-</div> 
-</section> 
-<p class="_a"><a href="https://125naroom.com/web/2958" target="_blank" class="link">View the note</a></p> 
-<nav id="navArea"> <!-- 変更 -->
-<div class="inner"> 
-<ul> 
-<li><a href="#">Text</a></li> 
-<li><a href="#">Text</a></li> 
-<li><a href="#">Text</a></li> 
-</ul> 
-</div> 
-</nav> 
-<div class="toggle_btn"> 
-<span></span> 
-<span></span> 
-<span></span> 
-</div> 
-<div id="mask"></div> 
-</div> 
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>testkita</title>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    /* 既存のスタイル */
+  </style>
+</head>
+<body>
+  <div class="content">
+    <section>
+      <div class="btn-trigger" id="btn05">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </section>
+    <p class="_a"><a href="https://125naroom.com/web/2958" target="_blank" class="link">View the note</a></p>
+    <nav id="navArea">
+      <div class="inner">
+        <ul>
+          <li><a href="#">Text</a></li>
+          <li><a href="#">Text</a></li>
+          <li><a href="#">Text</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="toggle_btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div id="mask"></div>
+  </div>
+
   <script>
+    $(document).ready(function() {
+      // ハンバーガーメニューのトグル
+      $('.toggle_btn').click(function() {
+        $('#navArea').toggleClass('open');
+        $('#mask').toggleClass('open');
+        $(this).toggleClass('open');
+      });
+
+      $('#mask').click(function() {
+        $('#navArea').removeClass('open');
+        $(this).removeClass('open');
+        $('.toggle_btn').removeClass('open');
+      });
+
+      // JSONデータを読み込む
+      fetch('data.json')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json();
+        })
+        .then(data => {
+          imageData = data.images;
+          console.log('JSON data loaded:', imageData); // デバッグ用
+          setupButtons();
+          loadImage('matunobe');
+        })
+        .catch(error => {
+          console.error('There has been a problem with your fetch operation:', error);
+        });
+    });
+
     var currentImage = 'matunobe';
     var imageData = [];
-
-    // JSONデータを読み込む
-    fetch('data.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-      })
-      .then(data => {
-        imageData = data.images;
-        console.log('JSON data loaded:', imageData); // デバッグ用
-        setupButtons();
-        loadImage('matunobe');
-      })
-      .catch(error => {
-        console.error('There has been a problem with your fetch operation:', error);
-      });
 
     function setupButtons() {
       var buttonContainer = document.getElementById('button-container');
@@ -97,20 +113,6 @@
         window.location.href = image.url;
       }
     }
-  $(document).ready(function() {
-    $('.toggle_btn').click(function() {
-      $('#navArea').toggleClass('open');
-      $('#mask').toggleClass('open');
-      $(this).toggleClass('open');
-    });
-
-    $('#mask').click(function() {
-      $('#navArea').removeClass('open');
-      $(this).removeClass('open');
-      $('.toggle_btn').removeClass('open');
-    });
-  });
-
   </script>
 </body>
 </html>
