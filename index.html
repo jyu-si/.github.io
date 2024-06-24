@@ -97,6 +97,20 @@
         window.location.href = image.url;
       }
     }
+  $(document).ready(function() {
+    $('.toggle_btn').click(function() {
+      $('#navArea').toggleClass('open');
+      $('#mask').toggleClass('open');
+      $(this).toggleClass('open');
+    });
+
+    $('#mask').click(function() {
+      $('#navArea').removeClass('open');
+      $(this).removeClass('open');
+      $('.toggle_btn').removeClass('open');
+    });
+  });
+
   </script>
 </body>
 </html>
