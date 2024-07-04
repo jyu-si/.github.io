@@ -6,36 +6,38 @@
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <link rel="stylesheet" type="text/css" href="styles.css">
   <script src="hum.js"></script>
+  <script>
+    window.onload = function () {
+      var nav = document.getElementById('nav-wrapper');
+      var hamburger = document.getElementById('js-hamburger');
+      var blackBg = document.getElementById('js-black-bg');
 
-  <div id="nav-wrapper" class="nav-wrapper">
-  <div class="hamburger" id="js-hamburger">
-    <span class="hamburger__line hamburger__line--1"></span>
-    <span class="hamburger__line hamburger__line--2"></span>
-    <span class="hamburger__line hamburger__line--3"></span>
-  </div>
-  <nav class="sp-nav">
-    <ul>
-      <li>メニュー1</li>
-      <li>メニュー1</li>
-      <li>メニュー1</li>
-    </ul>
-  </nav>
-  <div class="black-bg" id="js-black-bg"></div>
- </div>
+      hamburger.addEventListener('click', function () {
+          nav.classList.toggle('open');
+      });
+      blackBg.addEventListener('click', function () {
+          nav.classList.remove('open');
+      });
+    };
+  </script>
 </head>
 <body>
- window.onload = function () {
-    var nav = document.getElementById('nav-wrapper');
-    var hamburger = document.getElementById('js-hamburger');
-    var blackBg = document.getElementById('js-black-bg');
+  <div id="nav-wrapper" class="nav-wrapper">
+    <div class="hamburger" id="js-hamburger">
+      <span class="hamburger__line hamburger__line--1"></span>
+      <span class="hamburger__line hamburger__line--2"></span>
+      <span class="hamburger__line hamburger__line--3"></span>
+    </div>
+    <nav class="sp-nav">
+      <ul>
+        <li>メニュー1</li>
+        <li>メニュー2</li>
+        <li>メニュー3</li>
+      </ul>
+    </nav>
+    <div class="black-bg" id="js-black-bg"></div>
+  </div>
 
-    hamburger.addEventListener('click', function () {
-        nav.classList.toggle('open');
-    });
-    blackBg.addEventListener('click', function () {
-        nav.classList.remove('open');
-    });
-};
   <a-scene>
     <a-sky id="image" src="#matunobe-image"></a-sky>
     <a-entity position="0 1.6 -2">
@@ -104,8 +106,6 @@
         window.location.href = image.url;
       }
     }
-
-   
   </script>
 </body>
 </html>
