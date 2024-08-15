@@ -1,39 +1,46 @@
-{"images": [
 {
-"id": "matunobe",
-"src": "1214820_m.jpg",
-"label": "Lab1",
-"url": "https://www.city.tondabayashi.lg.jp/"
-},
-{
-"id": "harada",
-"src": "2.jpg",
-"label": "Lab2",
-"url": "https://www.wakayama-u.ac.jp/"
-},
-{
-"id": "imai",
-"src": "27692040_s.jpg",
-"label": "Lab3",
-"url": "https://researchers.center.wakayama-u.ac.jp/html/100000632_ja.html"
-},
-{
-"id": "kawasumi",
-"src": "3.jpg",
-"label": "Lab4",
-"url": "https://sites.google.com/g.wakayama-u.jp/spacedesignlab/"
-},
-{
-"id": "tokoi",
-"src": "27736087_s.jpg",
-"label": "Lab5",
-"url": "https://marina.sys.wakayama-u.ac.jp/~tokoi/"
-},
-{
-"id": "nisimura",
-"src": "23992391_s.jpg",
-"label": "Lab6",
-"url": "https://mdi-lab.sys.wakayama-u.ac.jp/"
-}
-]
+  "images": [
+    {
+      "id": "matunobe",
+      "src": "1214820_m.jpg",
+      "label": "Lab1",
+      "name": "松延研究室",
+      "url": "https://www.city.tondabayashi.lg.jp/"
+    },
+    {
+      "id": "harada",
+      "src": "2.jpg",
+      "label": "Lab2",
+      "name": "原田研究室",
+      "url": "https://www.wakayama-u.ac.jp/"
+    },
+    {
+      "id": "imai",
+      "src": "27692040_s.jpg",
+      "label": "Lab3",
+      "name": "今井研究室",
+      "url": "https://researchers.center.wakayama-u.ac.jp/html/100000632_ja.html"
+    },
+    {
+      "id": "kawasumi",
+      "src": "3.jpg",
+      "label": "Lab4",
+      "name": "川角研究室",
+      "url": "https://sites.google.com/g.wakayama-u.jp/spacedesignlab/"
+    },
+    {
+      "id": "tokoi",
+      "src": "27736087_s.jpg",
+      "label": "Lab5",
+      "name": "床井研究室",
+      "url": "https://marina.sys.wakayama-u.ac.jp/~tokoi/"
+    },
+    {
+      "id": "nisimura",
+      "src": "23992391_s.jpg",
+      "label": "Lab6",
+      "name": "西村研究室",
+      "url": "https://mdi-lab.sys.wakayama-u.ac.jp/"
+    }
+  ]
 }
