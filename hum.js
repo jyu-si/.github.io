@@ -1,7 +1,5 @@
-document.querySelector('.openbtn4').addEventListener('click', function() {
-    this.classList.toggle('active');
-    document.getElementById('button-container').classList.toggle('show');
-});
+document.querySelector('.openbtn4').addEventListener('click', toggleMenu);
+
 function toggleMenu() {
   var button = document.querySelector('.openbtn4');
   var menu = document.getElementById('button-container');
