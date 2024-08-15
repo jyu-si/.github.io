@@ -9,7 +9,6 @@
       margin: 0;
       overflow: hidden;
     }
-    /* ボタンのコンテナを左上に固定 */
     .button-container {
       position: absolute;
       top: 10px;
@@ -18,77 +17,104 @@
       display: flex;
       flex-direction: column;
     }
-    /* 切り替えボタンのスタイル */
     .switch-button {
       margin: 5px;
       padding: 10px 20px;
       font-size: 16px;
-      background-color: #4CAF50; /* 緑色 */
+      background-color: #4CAF50;
       color: white;
       border: none;
       cursor: pointer;
       border-radius: 5px;
     }
     .switch-button:hover {
-      background-color: #45a049; /* ホバー時の色 */
+      background-color: #45a049;
     }
-    /* URLボタンのスタイル */
     .url-button {
       margin: 5px;
       padding: 10px 20px;
       font-size: 16px;
-      background-color: #008CBA; /* 青色 */
+      background-color: #008CBA;
       color: white;
       border: none;
       cursor: pointer;
       border-radius: 5px;
     }
     .url-button:hover {
-      background-color: #007bb5; /* ホバー時の色 */
+      background-color: #007bb5;
     }
-  </style>  
+  </style>
 </head>
 <body>
-  <div class="button-container">
-    <!-- 切り替えボタンには switch-button クラスを適用 -->
-    <button class="switch-button" onclick="switchImage('morning')">１</button>
-    <button class="switch-button" onclick="switchImage('afternoon')">２</button>
-    <!-- URLボタンには url-button クラスを適用 -->
-    <button class="url-button" onclick="goToURL()">富田林市</button>
+  <div class="button-container" id="button-container">
+    <button class="url-button" onclick="goToURL()">ホームページ</button>
   </div>
   <a-scene>
-    <a-sky id="image" src="#morning-image"></a-sky>
+    <a-sky id="image" src="#matunobe-image"></a-sky>
     <a-entity position="0 1.6 -2">
       <a-text id="label-text" value="Lab1" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
     </a-entity>
   </a-scene>
-  <!-- 朝の画像 -->
-  <img id="morning-image" src="/mnt/data/S__13697186.jpg" style="display:none">
-  <!-- 昼の画像 -->
-  <img id="afternoon-image" src="img-2 (1).jpg" style="display:none">
-
   <script>
-    var currentImage = 'morning'; // 現在の画像を追跡する変数
+    var currentImage = 'matunobe';
+    var imageData = [];
 
-    function switchImage(time) {
-      var sky = document.getElementById('image');
-      var labelText = document.getElementById('label-text'); // 直接a-textのidを使用
-      if (time === 'morning') {
-        sky.setAttribute('src', '#morning-image');
-        labelText.setAttribute('value', 'Lab1'); // Lab1に変更
-        currentImage = 'morning'; // 現在の画像を更新
-      } else if (time === 'afternoon') {
-        sky.setAttribute('src', '#afternoon-image');
-        labelText.setAttribute('value', 'Lab2'); // Lab2に変更
-        currentImage = 'afternoon'; // 現在の画像を更新
+    // JSONデータを読み込む
+    fetch('data.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(data => {
+        imageData = data.images;
+        console.log('JSON data loaded:', imageData); // デバッグ用
+        setupButtons();
+        loadImage('matunobe');
+      })
+      .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+
+    function setupButtons() {
+      var buttonContainer = document.getElementById('button-container');
+      imageData.forEach(image => {
+        var button = document.createElement('button');
+        button.className = 'switch-button';
+        button.innerText = image.id;
+        button.onclick = () => switchImage(image.id);
+        buttonContainer.insertBefore(button, buttonContainer.firstChild);
+        console.log('Button created for:', image.id); // デバッグ用
+      });
+    }
+
+    function switchImage(id) {
+      var image = imageData.find(img => img.id === id);
+      if (image) {
+        var sky = document.getElementById('image');
+        var labelText = document.getElementById('label-text');
+        sky.setAttribute('src', image.src); // Use the direct source path
+        labelText.setAttribute('value', image.label);
+        currentImage = id;
+      }
+    }
+
+    function loadImage(id) {
+      var image = imageData.find(img => img.id === id);
+      if (image) {
+        var sky = document.getElementById('image');
+        var labelText = document.getElementById('label-text');
+        sky.setAttribute('src', image.src); // Use the direct source path
+        labelText.setAttribute('value', image.label);
+        console.log('Image loaded:', id); // デバッグ用
       }
     }
 
     function goToURL() {
-      if (currentImage === 'morning') {
-        window.location.href = "https://www.city.tondabayashi.lg.jp/";
-      } else if (currentImage === 'afternoon') {
-        window.location.href = "https://www.wakayama-u.ac.jp/";
+      var image = imageData.find(img => img.id === currentImage);
+      if (image) {
+        window.location.href = image.url;
       }
     }
   </script>
