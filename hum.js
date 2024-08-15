@@ -2,6 +2,13 @@ document.querySelector('.openbtn4').addEventListener('click', function() {
     this.classList.toggle('active');
     document.getElementById('button-container').classList.toggle('show');
 });
+function toggleMenu() {
+  var button = document.querySelector('.openbtn4');
+  var menu = document.getElementById('button-container');
+  button.classList.toggle('active');
+  menu.classList.toggle('show');
+}
+
 
 function switchImage(id) {
   var image = imageData.find(img => img.id === id);
