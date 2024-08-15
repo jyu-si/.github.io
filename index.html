@@ -78,16 +78,17 @@
       });
 
     function setupButtons() {
-      var buttonContainer = document.getElementById('button-container');
-      imageData.forEach(image => {
-        var button = document.createElement('button');
-        button.className = 'switch-button';
-        button.innerText = image.id;
-        button.onclick = () => switchImage(image.id);
-        buttonContainer.insertBefore(button, buttonContainer.firstChild);
-        console.log('Button created for:', image.id); // デバッグ用
-      });
-    }
+	  var buttonContainer = document.getElementById('button-container');
+	  imageData.forEach(image => {
+		var button = document.createElement('button');
+		button.className = 'switch-button';
+		button.innerText = image.id;
+		button.onclick = () => switchImage(image.id);
+		buttonContainer.appendChild(button);  // 変更点
+		console.log('Button created for:', image.id); // デバッグ用
+	  });
+	}
+
 
     function switchImage(id) {
       var image = imageData.find(img => img.id === id);
