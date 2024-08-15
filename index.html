@@ -7,9 +7,10 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="hamburger-menu" onclick="toggleMenu()">
-    &#9776;
+  <div class="openbtn4" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
   </div>
+  
   <div class="button-container" id="button-container">
     <!-- ボタンがここに動的に追加されます -->
   </div>
@@ -25,6 +26,8 @@
       <a-text id="label-text" value="Lab1" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
     </a-entity>
   </a-scene>
+  
+  <script src="hum.js"></script>
   <script>
     var currentImage = 'matunobe';
     var imageData = [];
@@ -65,11 +68,6 @@
         document.getElementById('image').setAttribute('src', image.src);
         document.getElementById('label-text').setAttribute('value', image.label);
       }
-    }
-
-    function toggleMenu() {
-      var buttonContainer = document.getElementById('button-container');
-      buttonContainer.classList.toggle('show');
     }
 
     function goToURL() {
