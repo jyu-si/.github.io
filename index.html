@@ -4,50 +4,14 @@
   <meta charset="UTF-8">
   <title>testkita</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-    }
-    .button-container {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .switch-button {
-      margin: 5px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .switch-button:hover {
-      background-color: #45a049;
-    }
-    .url-button {
-      margin: 5px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #008CBA;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .url-button:hover {
-      background-color: #007bb5;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="hamburger-menu" onclick="toggleMenu()">
+    &#9776;
+  </div>
   <div class="button-container" id="button-container">
-    <button class="url-button" onclick="goToURL()">ホームページ</button>
+    <!-- ボタンがここに動的に追加されます -->
   </div>
   <a-scene>
     <a-sky id="image" src="1214820_m.jpg"></a-sky>
@@ -59,44 +23,32 @@
     var currentImage = 'matunobe';
     var imageData = [];
 
-    // JSONデータを読み込む
     fetch('data.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
         imageData = data.images;
-        console.log('JSON data loaded:', imageData); // デバッグ用
         setupButtons();
         loadImage('matunobe');
       })
-      .catch(error => {
-        console.error('There has been a problem with your fetch operation:', error);
-      });
+      .catch(error => console.error('Error:', error));
 
     function setupButtons() {
-	  var buttonContainer = document.getElementById('button-container');
-	  imageData.forEach(image => {
-		var button = document.createElement('button');
-		button.className = 'switch-button';
-		button.innerText = image.id;
-		button.onclick = () => switchImage(image.id);
-		buttonContainer.appendChild(button);  // 変更点
-		console.log('Button created for:', image.id); // デバッグ用
-	  });
-	}
-
+      var buttonContainer = document.getElementById('button-container');
+      buttonContainer.innerHTML = ''; // 既存のボタンをクリア
+      imageData.forEach(image => {
+        var button = document.createElement('button');
+        button.className = 'switch-button';
+        button.innerText = image.label;
+        button.onclick = () => switchImage(image.id);
+        buttonContainer.appendChild(button);
+      });
+    }
 
     function switchImage(id) {
       var image = imageData.find(img => img.id === id);
       if (image) {
-        var sky = document.getElementById('image');
-        var labelText = document.getElementById('label-text');
-        sky.setAttribute('src', image.src); // Use the direct source path
-        labelText.setAttribute('value', image.label);
+        document.getElementById('image').setAttribute('src', image.src);
+        document.getElementById('label-text').setAttribute('value', image.label);
         currentImage = id;
       }
     }
@@ -104,12 +56,14 @@
     function loadImage(id) {
       var image = imageData.find(img => img.id === id);
       if (image) {
-        var sky = document.getElementById('image');
-        var labelText = document.getElementById('label-text');
-        sky.setAttribute('src', image.src); // Use the direct source path
-        labelText.setAttribute('value', image.label);
-        console.log('Image loaded:', id); // デバッグ用
+        document.getElementById('image').setAttribute('src', image.src);
+        document.getElementById('label-text').setAttribute('value', image.label);
       }
+    }
+
+    function toggleMenu() {
+      var buttonContainer = document.getElementById('button-container');
+      buttonContainer.classList.toggle('show');
     }
 
     function goToURL() {
