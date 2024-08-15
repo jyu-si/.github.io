@@ -23,7 +23,7 @@
   <a-scene>
     <a-sky id="image" src="1214820_m.jpg"></a-sky>
     <a-entity position="0 1.6 -2">
-      <a-text id="label-text" value="Lab1" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
+      <a-text id="label-text" value="松延研究室" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
     </a-entity>
   </a-scene>
   
@@ -57,7 +57,7 @@
       var image = imageData.find(img => img.id === id);
       if (image) {
         document.getElementById('image').setAttribute('src', image.src);
-        document.getElementById('label-text').setAttribute('value', image.label);
+        document.getElementById('label-text').setAttribute('value', image.name);
         currentImage = id;
       }
     }
