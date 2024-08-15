@@ -1,5 +1,4 @@
-document.querySelector('.openbtn4').addEventListener('click', toggleMenu);
-
+// ハンバーガーメニューの開閉機能を定義
 function toggleMenu() {
   var button = document.querySelector('.openbtn4');
   var menu = document.getElementById('button-container');
@@ -7,7 +6,12 @@ function toggleMenu() {
   menu.classList.toggle('show');
 }
 
+// ページがロードされた後でイベントリスナーを追加
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelector('.openbtn4').addEventListener('click', toggleMenu);
+});
 
+// 画像の切り替え機能を定義
 function switchImage(id) {
   var image = imageData.find(img => img.id === id);
   if (image) {
