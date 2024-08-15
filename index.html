@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="openbtn4" onclick="toggleMenu()">
+  <div class="openbtn4">
     <span></span><span></span><span></span>
   </div>
   
@@ -27,30 +27,13 @@
     </a-entity>
   </a-scene>
   
-  <script src="hum.js"></script>
   <script>
-    var currentImage = 'matunobe';
-    var imageData = [];
-
-    fetch('data.json')
-      .then(response => response.json())
-      .then(data => {
-        imageData = data.images;
-        setupButtons();
-        loadImage('matunobe');
-      })
-      .catch(error => console.error('Error:', error));
-
-    function setupButtons() {
-      var buttonContainer = document.getElementById('button-container');
-      buttonContainer.innerHTML = ''; // 既存のボタンをクリア
-      imageData.forEach(image => {
-        var button = document.createElement('button');
-        button.className = 'switch-button';
-        button.innerText = image.label;
-        button.onclick = () => switchImage(image.id);
-        buttonContainer.appendChild(button);
-      });
+    // 関数の定義
+    function toggleMenu() {
+      var button = document.querySelector('.openbtn4');
+      var menu = document.getElementById('button-container');
+      button.classList.toggle('active');
+      menu.classList.toggle('show');
     }
 
     function switchImage(id) {
@@ -70,19 +53,10 @@
       }
     }
 
-    function goToURL() {
-      var image = imageData.find(img => img.id === currentImage);
-      if (image) {
-        window.location.href = image.url;
-      }
-    }
-
-    function toggleMenu() {
-      var button = document.querySelector('.openbtn4');
-      var menu = document.getElementById('button-container');
-      button.classList.toggle('active');
-      menu.classList.toggle('show');
-    }
+    // イベントリスナーの設定は関数定義の後
+    document.querySelector('.openbtn4').addEventListener('click', toggleMenu);
   </script>
+  
+  <script src="hum.js"></script>
 </body>
 </html>
