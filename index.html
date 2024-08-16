@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="openbtn4">
+  <div class="openbtn4" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </div>
   
@@ -23,10 +23,60 @@
   <a-scene>
     <a-sky id="image" src="1214820_m.jpg"></a-sky>
     <a-entity position="0 1.6 -2">
-      <a-text id="label-text" value="松延研究室" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
+      <a-text id="label-text" value="Lab1" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
     </a-entity>
   </a-scene>
   
   <script src="hum.js"></script>
+  <script>
+    var currentImage = 'matunobe';
+    var imageData = [];
+
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        imageData = data.images;
+        setupButtons();
+        loadImage('matunobe');
+      })
+      .catch(error => console.error('Error:', error));
+
+    function setupButtons() {
+      var buttonContainer = document.getElementById('button-container');
+      buttonContainer.innerHTML = ''; // 既存のボタンをクリア
+      imageData.forEach(image => {
+        var button = document.createElement('button');
+        button.className = 'switch-button';
+        button.innerText = image.label;
+        button.onclick = () => switchImage(image.id);
+        buttonContainer.appendChild(button);
+      });
+    }
+
+    function switchImage(id) {
+      var image = imageData.find(img => img.id === id);
+      if (image) {
+        document.getElementById('image').setAttribute('src', image.src);
+        document.getElementById('label-text').setAttribute('value', image.label);
+        currentImage = id;
+      }
+    }
+
+    function loadImage(id) {
+      var image = imageData.find(img => img.id === id);
+      if (image) {
+        document.getElementById('image').setAttribute('src', image.src);
+        document.getElementById('label-text').setAttribute('value', image.label);
+      }
+    }
+
+    function goToURL() {
+      var image = imageData.find(img => img.id === currentImage);
+      if (image) {
+        window.location.href = image.url;
+      }
+    }
+  </script>
 </body>
 </html>
+
