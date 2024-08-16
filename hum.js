@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // 初期画像のIDを設定
-    var currentImage = 'matunobe';
+    var currentImage = '松延研究室';
     // 画像データを格納する配列
     var imageData = [];
 
