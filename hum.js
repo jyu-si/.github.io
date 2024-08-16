@@ -41,12 +41,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function goToURL() {
+    // goToURL関数をグローバルスコープに公開
+    window.goToURL = function() {
         var image = imageData.find(img => img.id === currentImage);
         if (image) {
             window.location.href = image.url;
         }
-    }
+    };
 
     // toggleMenu関数の定義
     function toggleMenu() {
