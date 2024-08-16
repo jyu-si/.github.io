@@ -3,30 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <title>testkita</title>
+  <!-- A-Frameのライブラリを読み込む -->
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <!-- 外部CSSファイルを読み込む -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- ハンバーガーメニューのボタン -->
   <div class="openbtn4">
     <span></span><span></span><span></span>
   </div>
   
+  <!-- 動的にボタンが追加されるコンテナ -->
   <div class="button-container" id="button-container">
     <!-- ボタンがここに動的に追加されます -->
   </div>
   
-  <!-- URLボタン -->
+  <!-- 外部リンクに遷移するためのボタン -->
   <div class="url-button-container">
     <button class="url-button" onclick="goToURL()">ホームページ</button>
   </div>
 
+  <!-- A-Frameシーンの定義 -->
   <a-scene>
+    <!-- 初期画像を表示するスカイボックス -->
     <a-sky id="image" src="1214820_m.jpg"></a-sky>
+    <!-- テキストラベルを表示 -->
     <a-entity position="0 1.6 -2">
       <a-text id="label-text" value="matunobe" align="center" color="#0000ff" width="6" font="mozillavr" anchor="center"></a-text>
     </a-entity>
   </a-scene>
   
+  <!-- 外部JavaScriptファイルを読み込む -->
   <script src="hum.js"></script>
 </body>
 </html>
