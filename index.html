@@ -7,14 +7,6 @@
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <!-- 外部CSSファイルを読み込む -->
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* 枠線用のカスタムスタイル */
-    .text-border {
-      border: 2px solid black; /* 枠線を黒色で設定 */
-      padding: 10px; /* テキスト周りにスペースを確保 */
-      background-color: rgba(255, 255, 255, 0.5); /* 透明な白背景を追加して読みやすく */
-    }
-  </style>
 </head>
 <body>
   <!-- ハンバーガーメニューのボタン -->
@@ -38,7 +30,10 @@
     <a-sky id="image" src="1214820_m.jpg"></a-sky>
     <!-- テキストラベルを表示 -->
     <a-entity position="0 1.6 -2">
-      <a-text id="label-text" value="matunobe" align="center" color="#000000" width="6" font="mozillavr" anchor="center" class="text-border"></a-text>
+      <!-- テキストの背景として白いプレーンを追加 -->
+      <a-plane color="white" width="3" height="1" position="0 0 0.01"></a-plane>
+      <!-- テキストを黒色に設定 -->
+      <a-text id="label-text" value="matunobe" align="center" color="#000000" width="6" font="mozillavr" anchor="center"></a-text>
     </a-entity>
   </a-scene>
   
