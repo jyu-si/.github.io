@@ -11,7 +11,7 @@ body {
   top: 10px;
   left: 10px;
   z-index: 2;
-  background:#D54884;
+  background:#4CAF50;
   cursor: pointer;
   width: 50px;
   height:50px;
@@ -100,7 +100,7 @@ body {
   margin: 5px;
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #D54884;
+  background-color: #4CAF50;
   color: white;
   border: none;
   cursor: pointer;
@@ -109,7 +109,7 @@ body {
 
 /* スイッチボタンのホバー時のスタイル */
 .switch-button:hover {
-  background-color: #BF3C73;
+  background-color: #45a049;
 }
 
 /* URLボタンコンテナのスタイル */
