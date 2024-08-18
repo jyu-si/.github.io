@@ -33,12 +33,21 @@ document.addEventListener('DOMContentLoaded', function() {
         var image = imageData.find(img => img.id === id);
         if (image) {
             document.getElementById('image').setAttribute('src', image.src);
-            // id と label をそれぞれのテキスト要素に設定
-            document.getElementById('id-text').setAttribute('value', image.id);
-            document.getElementById('label-text').setAttribute('value', image.label);
-            currentImage = id;  // 現在の画像IDを更新
+    
+            var idText = document.getElementById('id-text');
+            var labelText = document.getElementById('label-text');
+    
+            if (idText && labelText) {
+                idText.setAttribute('value', image.id);
+                labelText.setAttribute('value', image.label);
+            } else {
+                console.error('id-text または label-text 要素が見つかりません');
+            }
+    
+            currentImage = id;
         }
     }
+
 
     // 初期画像を読み込む関数
     function loadImage(id) {
