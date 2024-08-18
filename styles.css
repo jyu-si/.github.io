@@ -100,7 +100,7 @@ body {
   margin: 5px;
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #4CAF50;
+  background-color: #D54884;
   color: white;
   border: none;
   cursor: pointer;
@@ -109,7 +109,7 @@ body {
 
 /* スイッチボタンのホバー時のスタイル */
 .switch-button:hover {
-  background-color: #45a049;
+  background-color: #BF3C73;
 }
 
 /* URLボタンコンテナのスタイル */
