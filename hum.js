@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     // 初期画像のIDを設定
-    var currentImage = '松延研究室';
+    var initialImage = '松延研究室'; // 初期画像のIDを保存
+    var currentImage = initialImage;
+    // 初期カメラの位置と向きを保存
+    var initialCameraPosition = { x: 0, y: 1.6, z: 0 };
+    var initialCameraRotation = { x: 0, y: 0, z: 0 };
     // 画像データを格納する配列
     var imageData = [];
 
@@ -48,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-
     // 初期画像を読み込む関数
     function loadImage(id) {
         var image = imageData.find(img => img.id === id);
@@ -66,6 +69,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (image) {
             window.location.href = image.url;
         }
+    };
+
+    // 初期状態に視点をリセットする関数
+    window.resetView = function() {
+        var camera = document.getElementById('camera');
+        camera.setAttribute('position', initialCameraPosition);
+        camera.setAttribute('rotation', initialCameraRotation);
     };
 
     // メニューをトグルする関数
