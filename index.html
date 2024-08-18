@@ -18,43 +18,44 @@
   <!-- URLボタン -->
   <div class="url-button-container">
     <button class="url-button" onclick="goToURL()">ホームページ</button>
+    <button class="url-button" onclick="resetView()">視点リセット</button> <!-- 視点リセットボタン追加 -->
   </div>
 
   <a-scene>
     <a-sky id="image" src="1214820_m.jpg"></a-sky>
-<a-entity position="0 2.8 -2">
-  <!-- テキストの背景として透明度50%の白いプレーンを追加 (少し奥に配置) -->
-  <a-plane color="#FFFFFF" opacity="0.35" width="3.5" height="1.5" position="0 0.1 -0.01"></a-plane>
+    <a-entity id="camera-wrapper">
+      <a-camera id="camera" position="0 1.6 0"></a-camera>
+    </a-entity>
+    <a-entity position="0 2.8 -2">
+      <!-- テキストの背景として透明度50%の白いプレーンを追加 (少し奥に配置) -->
+      <a-plane color="#FFFFFF" opacity="0.35" width="3.5" height="1.5" position="0 0.1 -0.01"></a-plane>
 
-  <!-- idのテキスト -->
-  <a-text id="id-text" 
-          value="視覚メディア研"
-          align="center" 
-          color="#000000" 
-          width="6" 
-          font="KTEGAKI-msdf.json" 
-          font-image="KTEGAKI-msdf.png" 
-          negate="false" 
-          scale="2 2 1" 
-          position="0 0.3 0">
-  </a-text>
+      <!-- idのテキスト -->
+      <a-text id="id-text" 
+              value="視覚メディア研"
+              align="center" 
+              color="#000000" 
+              width="6" 
+              font="KTEGAKI-msdf.json" 
+              font-image="KTEGAKI-msdf.png" 
+              negate="false" 
+              scale="2 2 1" 
+              position="0 0.3 0">
+      </a-text>
 
-  <!-- labelのテキスト -->
- <a-text id="label-text" 
-        value="今井研究室"  
-        align="center" 
-        color="#000000" 
-        width="4"  
-        font="KTEGAKI-msdf.json" 
-        font-image="KTEGAKI-msdf.png" 
-        negate="false" 
-        scale="1.2 1.2 1"  
-        position="1.0 -0.2 0">  <!-- y座標を下に下げる -->
-</a-text>
-
-</a-entity>
-
-
+      <!-- labelのテキスト -->
+      <a-text id="label-text" 
+              value="今井研究室"  
+              align="center" 
+              color="#000000" 
+              width="4"  
+              font="KTEGAKI-msdf.json" 
+              font-image="KTEGAKI-msdf.png" 
+              negate="false" 
+              scale="1.2 1.2 1"  
+              position="1.0 -0.2 0">
+      </a-text>
+    </a-entity>
   </a-scene>
   
   <script src="hum.js"></script>
