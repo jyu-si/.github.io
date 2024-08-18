@@ -28,27 +28,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-// 画像を切り替える関数
-function switchImage(id) {
-    var image = imageData.find(img => img.id === id);
-    if (image) {
-        document.getElementById('image').setAttribute('src', image.src);
-        // 中央に "id" と "label" を表示
-        document.getElementById('label-text').setAttribute('value', image.id + "\n" + image.label);
-        currentImage = id;  // 現在の画像IDを更新
+    // 画像を切り替える関数
+    function switchImage(id) {
+        var image = imageData.find(img => img.id === id);
+        if (image) {
+            document.getElementById('image').setAttribute('src', image.src);
+            // id と label をそれぞれのテキスト要素に設定
+            document.getElementById('id-text').setAttribute('value', image.id);
+            document.getElementById('label-text').setAttribute('value', image.label);
+            currentImage = id;  // 現在の画像IDを更新
+        }
     }
-}
 
-// 初期画像を読み込む関数
-function loadImage(id) {
-    var image = imageData.find(img => img.id === id);
-    if (image) {
-        document.getElementById('image').setAttribute('src', image.src);
-        // 初期表示も "id" と "label" を表示
-        document.getElementById('label-text').setAttribute('value', image.id + "\n" + image.label);
+    // 初期画像を読み込む関数
+    function loadImage(id) {
+        var image = imageData.find(img => img.id === id);
+        if (image) {
+            document.getElementById('image').setAttribute('src', image.src);
+            // 初期表示でも id と label を設定
+            document.getElementById('id-text').setAttribute('value', image.id);
+            document.getElementById('label-text').setAttribute('value', image.label);
+        }
     }
-}
-
 
     // 現在表示されている画像のURLに遷移する関数
     window.goToURL = function() {
