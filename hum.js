@@ -47,10 +47,13 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 console.error('id-text または label-text 要素が見つかりません');
             }
-    
+
+            // ハンバーガーメニューを閉じる
+            document.querySelector('.openbtn4').classList.remove('active');
+            document.getElementById('button-container').classList.remove('show');
+
             currentImage = id;
         }
-    }
 
     // 初期画像を読み込む関数
     function loadImage(id) {
