@@ -71,12 +71,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // 初期状態に視点をリセットする関数
-    window.resetView = function() {
-        var camera = document.getElementById('camera');
-        camera.setAttribute('position', initialCameraPosition);
-        camera.setAttribute('rotation', initialCameraRotation);
-    };
+window.resetView = function() {
+    var camera = document.querySelector('a-camera');
+    if (camera) {
+        // 一度 look-controls を無効にする
+        camera.removeAttribute('look-controls');
+        
+        // カメラの位置と回転をリセット
+        camera.setAttribute('position', { x: 0, y: 1.6, z: 0 });
+        camera.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+        
+        // look-controls を再び有効にする
+        camera.setAttribute('look-controls', '');
+    } else {
+        console.error('カメラが見つかりません');
+    }
+};
+
 
     // メニューをトグルする関数
     function toggleMenu() {
