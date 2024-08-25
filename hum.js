@@ -101,4 +101,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ハンバーガーボタンにクリックイベントを設定
     document.querySelector('.openbtn4').addEventListener('click', toggleMenu);
-};
+}); // ← ここでイベントリスナーの閉じを追加
