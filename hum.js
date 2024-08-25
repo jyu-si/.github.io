@@ -100,4 +100,4 @@ window.resetView = function() {
 
     // ハンバーガーボタンにクリックイベントを設定
     document.querySelector('.openbtn4').addEventListener('click', toggleMenu);
-});
+};
