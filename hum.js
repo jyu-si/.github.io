@@ -47,11 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 console.error('id-text または label-text 要素が見つかりません');
             }
-
-            // ハンバーガーメニューを閉じる
-            document.querySelector('.openbtn4').classList.remove('active');
-            document.getElementById('button-container').classList.remove('show');
-
+    
             currentImage = id;
         }
     }
@@ -77,20 +73,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 初期状態に視点をリセットする関数
     window.resetView = function() {
-        var camera = document.querySelector('a-camera');
-        if (camera) {
-            // 一度 look-controls を無効にする
-            camera.removeAttribute('look-controls');
-            
-            // カメラの位置と回転をリセット
-            camera.setAttribute('position', { x: 0, y: 1.6, z: 0 });
-            camera.setAttribute('rotation', { x: 0, y: 0, z: 0 });
-            
-            // look-controls を再び有効にする
-            camera.setAttribute('look-controls', '');
-        } else {
-            console.error('カメラが見つかりません');
-        }
+        var camera = document.getElementById('camera');
+        camera.setAttribute('position', initialCameraPosition);
+        camera.setAttribute('rotation', initialCameraRotation);
     };
 
     // メニューをトグルする関数
@@ -101,4 +86,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ハンバーガーボタンにクリックイベントを設定
     document.querySelector('.openbtn4').addEventListener('click', toggleMenu);
-}); // ← ここでイベントリスナーの閉じを追加
+});
