@@ -30,7 +30,7 @@ body {
   background-color: #007bb5;
 }
 
-/* コンテンツ表示後に非表示にするためのクラス */
+
 .hidden {
   display: none;
 }
