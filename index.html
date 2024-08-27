@@ -65,12 +65,33 @@
     </a-scene>
   </div>
   
-  <script src="hum.js"></script>
-  <script>
-    document.getElementById('start-button').onclick = function() {
-      document.getElementById('start-screen').classList.add('hidden');
-      document.getElementById('content-container').classList.remove('hidden');
-    };
-  </script>
+<script src="hum.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // スタートボタンのクリックイベント
+        document.getElementById('start-button').onclick = function() {
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('content-container').classList.remove('hidden');
+
+            // コンテンツが表示された後に視点リセットの初期化を行う
+            initializeResetView();
+        };
+    });
+
+    function initializeResetView() {
+        // 視点リセットボタンのクリックイベントを設定
+        document.querySelector('.url-button').onclick = function() {
+            resetView();
+        };
+    }
+
+    function resetView() {
+        var camera = document.getElementById('camera');
+        var initialCameraPosition = { x: 0, y: 1.6, z: 0 };
+        var initialCameraRotation = { x: 0, y: 0, z: 0 };
+        camera.setAttribute('position', initialCameraPosition);
+        camera.setAttribute('rotation', initialCameraRotation);
+    }
+</script>
 </body>
 </html>
