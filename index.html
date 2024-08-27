@@ -56,6 +56,22 @@
               position="1.0 -0.2 0">
       </a-text>
     </a-entity>
+
+    <!-- X座標を1右に移動させた白いプレーンとボタン -->
+    <a-entity position="1 2.8 -2">
+      <!-- 透明度のある白いボタン -->
+      <a-plane color="#FFFFFF" opacity="0.35" width="3.5" height="1.5" 
+               position="0 0.1 0" class="url-button-plane">
+      </a-plane>
+      
+      <!-- リンクボタン -->
+      <a-text id="link-button" value="ホームページへ"
+              align="center" color="#000000" width="6"
+              position="0 0 0.01" class="clickable"
+              event-set__click="_event: click; _target: window; url: goToURL();">
+      </a-text>
+    </a-entity>
+
   </a-scene>
   
   <script src="hum.js"></script>
