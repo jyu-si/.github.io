@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var camera = document.getElementById('camera');
 
         // look-controls を一時的に無効化
-        camera.setAttribute('look-controls', 'enabled', false);
+        camera.removeAttribute('look-controls');
 
         // カメラの位置と回転をリセット
         camera.setAttribute('position', initialCameraPosition);
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // look-controls を再度有効化
         setTimeout(function() {
-            camera.setAttribute('look-controls', 'enabled', true);
+            camera.setAttribute('look-controls', '');
         }, 100); // 少し遅延させることでリセットが確実に反映されるようにする
     };
 
