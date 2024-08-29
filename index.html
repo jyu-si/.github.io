@@ -21,10 +21,10 @@
       <!-- ボタンがここに動的に追加されます -->
     </div>
     
-    <!-- URLボタン -->
+    <!-- URLボタンコンテナ -->
     <div class="url-button-container">
-      <button class="url-button" onclick="goToURL()">ホームページ</button>
-      <button class="url-button" onclick="resetView()">視点リセット</button> <!-- 視点リセットボタン追加 -->
+      <button id="reset-button" class="url-button">視点リセット</button>
+      <button id="home-button" class="url-button">ホームページ</button> <!-- IDを追加 -->
     </div>
   
     <a-scene>
@@ -79,22 +79,28 @@
     });
 
     function initializeContent() {
-        // 視点リセットボタンのクリックイベントを設定
-        document.querySelector('.url-button').addEventListener('click', function() {
-            resetView();
-        });
+        // 必要な要素が正しく取得できるか確認
+        var resetButton = document.getElementById('reset-button');
+        var homeButton = document.getElementById('home-button');
 
-        // ホームページボタンのクリックイベントを設定
-        document.querySelector('.url-button[href]').addEventListener('click', function() {
-            window.goToURL();
-        });
+        if (resetButton) {
+            resetButton.addEventListener('click', function() {
+                resetView();
+            });
+        }
+
+        if (homeButton) {
+            homeButton.addEventListener('click', function() {
+                window.goToURL();
+            });
+        }
     }
 
     function resetView() {
         var camera = document.getElementById('camera');
 
         // look-controls を一時的に無効化
-        camera.setAttribute('look-controls', 'enabled', false);
+        camera.removeAttribute('look-controls');
 
         // カメラの位置と回転をリセット
         camera.setAttribute('position', { x: 0, y: 1.6, z: 0 });
@@ -102,10 +108,9 @@
 
         // look-controls を再度有効化
         setTimeout(function() {
-            camera.setAttribute('look-controls', 'enabled', true);
+            camera.setAttribute('look-controls', '');
         }, 100); // 少し遅延させることでリセットが確実に反映されるようにする
     }
 </script>
-
 </body>
 </html>
