@@ -74,8 +74,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // 初期状態に視点をリセットする関数
     window.resetView = function() {
         var camera = document.getElementById('camera');
+
+        // look-controls を一時的に無効化
+        camera.setAttribute('look-controls', 'enabled', false);
+
+        // カメラの位置と回転をリセット
         camera.setAttribute('position', initialCameraPosition);
         camera.setAttribute('rotation', initialCameraRotation);
+
+        // look-controls を再度有効化
+        setTimeout(function() {
+            camera.setAttribute('look-controls', 'enabled', true);
+        }, 100); // 少し遅延させることでリセットが確実に反映されるようにする
     };
 
     // メニューをトグルする関数
