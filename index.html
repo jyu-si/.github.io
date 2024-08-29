@@ -73,24 +73,25 @@
             document.getElementById('start-screen').classList.add('hidden');
             document.getElementById('content-container').classList.remove('hidden');
 
-            // コンテンツが表示された後に視点リセットの初期化を行う
-            initializeResetView();
+            // コンテンツが表示された後に視点リセットとホームページボタンの初期化を行う
+            initializeContent();
         };
     });
 
-    function initializeResetView() {
+    function initializeContent() {
         // 視点リセットボタンのクリックイベントを設定
-        document.querySelector('.url-button').onclick = function() {
-            resetView();
-        };
-    }
+        document.querySelector('.url-button').addEventListener('click', function() {
+            var camera = document.getElementById('camera');
+            var initialCameraPosition = { x: 0, y: 1.6, z: 0 };
+            var initialCameraRotation = { x: 0, y: 0, z: 0 };
+            camera.setAttribute('position', initialCameraPosition);
+            camera.setAttribute('rotation', initialCameraRotation);
+        });
 
-    function resetView() {
-        var camera = document.getElementById('camera');
-        var initialCameraPosition = { x: 0, y: 1.6, z: 0 };
-        var initialCameraRotation = { x: 0, y: 0, z: 0 };
-        camera.setAttribute('position', initialCameraPosition);
-        camera.setAttribute('rotation', initialCameraRotation);
+        // ホームページボタンのクリックイベントを設定
+        document.querySelector('.url-button[href]').addEventListener('click', function() {
+            window.goToURL();
+        });
     }
 </script>
 </body>
