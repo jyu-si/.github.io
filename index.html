@@ -81,11 +81,7 @@
     function initializeContent() {
         // 視点リセットボタンのクリックイベントを設定
         document.querySelector('.url-button').addEventListener('click', function() {
-            var camera = document.getElementById('camera');
-            var initialCameraPosition = { x: 0, y: 1.6, z: 0 };
-            var initialCameraRotation = { x: 0, y: 0, z: 0 };
-            camera.setAttribute('position', initialCameraPosition);
-            camera.setAttribute('rotation', initialCameraRotation);
+            resetView();
         });
 
         // ホームページボタンのクリックイベントを設定
@@ -93,6 +89,23 @@
             window.goToURL();
         });
     }
+
+    function resetView() {
+        var camera = document.getElementById('camera');
+
+        // look-controls を一時的に無効化
+        camera.setAttribute('look-controls', 'enabled', false);
+
+        // カメラの位置と回転をリセット
+        camera.setAttribute('position', { x: 0, y: 1.6, z: 0 });
+        camera.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+
+        // look-controls を再度有効化
+        setTimeout(function() {
+            camera.setAttribute('look-controls', 'enabled', true);
+        }, 100); // 少し遅延させることでリセットが確実に反映されるようにする
+    }
 </script>
+
 </body>
 </html>
