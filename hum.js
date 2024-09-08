@@ -27,7 +27,10 @@ document.addEventListener('DOMContentLoaded', function() {
             var button = document.createElement('button');
             button.className = 'switch-button';
             button.innerText = image.label;  // ボタンには "label" を使用
-            button.onclick = () => switchImage(image.id);  // クリックで画像を切り替え
+            button.onclick = () => {
+                switchImage(image.id);
+                toggleMenu();  // 研究室選択時にメニューを閉じる
+            };
             buttonContainer.appendChild(button);  // ボタンをコンテナに追加
         });
     }
