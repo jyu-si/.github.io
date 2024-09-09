@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // look-controls を再度有効化
         setTimeout(function() {
             camera.setAttribute('look-controls', '');
-        }, 100);
+        }, 100); // 少し遅延させることでリセットが確実に反映されるようにする
     };
 
     // メニューをトグルする関数
