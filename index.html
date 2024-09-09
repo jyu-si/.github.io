@@ -5,70 +5,11 @@
   <title>testkita</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* スタート画面のスタイル */
-    .start-screen {
-      background-color: #E0F7FA; /* 薄い水色の背景 */
-      position: fixed;
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .start-title {
-      font-size: 48px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    /* 中央に配置 */
-    .instructions-container {
-      background-color: #FFFFFF;
-      width: 60%;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      margin: 0 auto; /* 水平中央に配置 */
-    }
-
-    .instructions-title {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .instructions-text {
-      font-size: 16px; /* 使い方よりも小さく設定 */
-      line-height: 1.5;
-    }
-
-    .start-button {
-      padding: 15px 30px;
-      font-size: 24px;
-      background-color: #008CBA;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 20px; /* ボタンを中央に配置するために調整 */
-      margin-bottom: 20px;
-    }
-
-    .start-button:hover {
-      background-color: #007bb5;
-    }
-  </style>
 </head>
 <body>
   <!-- スタート画面のコンテナ -->
   <div id="start-screen" class="start-screen">
-    <!-- タイトル -->
     <div class="start-title">研究室ツアー</div>
-    
-    <!-- 使い方を記入するための長方形コンテナ -->
     <div class="instructions-container">
       <div class="instructions-title">使い方</div>
       <div class="instructions-text">
@@ -78,8 +19,6 @@
         ・"視点リセット"ボタン：最初の視点の方向に戻ります
       </div>
     </div>
-
-    <!-- スタートボタン -->
     <button id="start-button" class="start-button">スタート</button>
   </div>
   
@@ -87,7 +26,6 @@
     <div class="openbtn4">
       <span></span><span></span><span></span>
     </div>
-    
     <div class="button-container" id="button-container">
       <!-- ボタンがここに動的に追加されます -->
     </div>
@@ -95,44 +33,32 @@
     <!-- URLボタンコンテナ -->
     <div class="url-button-container">
       <button id="reset-button" class="url-button">視点リセット</button>
-      <button id="home-button" class="url-button">ホームページ</button> <!-- IDを追加 -->
+      <button id="home-button" class="url-button">ホームページ</button>
     </div>
   
     <a-scene>
-      <a-sky id="image" src="1214820_m.jpg"></a-sky>
-      <a-entity id="camera-wrapper">
-        <a-camera id="camera" position="0 1.6 0"></a-camera>
+      <!-- 4方向の矢印 -->
+      <a-entity position="0 2 -3">
+        <a-text id="north-text" value="器具A" position="0 0.5 0"></a-text>
+        <a-plane id="north-arrow" color="#007bb5" height="0.2" width="0.8" rotation="0 0 0"></a-plane>
       </a-entity>
-      <a-entity position="0 2.8 -2">
-        <!-- テキストの背景として透明度50%の白いプレーンを追加 (少し奥に配置) -->
-        <a-plane color="#FFFFFF" opacity="0.35" width="3.5" height="1.5" position="0 0.1 -0.01"></a-plane>
-  
-        <!-- idのテキスト -->
-        <a-text id="id-text" 
-                value="視覚メディア研"
-                align="center" 
-                color="#000000" 
-                width="6" 
-                font="KTEGAKI-msdf.json" 
-                font-image="KTEGAKI-msdf.png" 
-                negate="false" 
-                scale="2 2 1" 
-                position="0 0.3 0">
-        </a-text>
-  
-        <!-- labelのテキスト -->
-        <a-text id="label-text" 
-                value="今井研究室"  
-                align="center" 
-                color="#000000" 
-                width="4"  
-                font="KTEGAKI-msdf.json" 
-                font-image="KTEGAKI-msdf.png" 
-                negate="false" 
-                scale="1.2 1.2 1"  
-                position="1.0 -0.2 0">
-        </a-text>
+
+      <a-entity position="3 2 0">
+        <a-text id="east-text" value="器具B" position="0 0.5 0"></a-text>
+        <a-plane id="east-arrow" color="#007bb5" height="0.2" width="0.8" rotation="0 90 0"></a-plane>
       </a-entity>
+
+      <a-entity position="0 2 3">
+        <a-text id="south-text" value="器具C" position="0 0.5 0"></a-text>
+        <a-plane id="south-arrow" color="#007bb5" height="0.2" width="0.8" rotation="0 180 0"></a-plane>
+      </a-entity>
+
+      <a-entity position="-3 2 0">
+        <a-text id="west-text" value="器具D" position="0 0.5 0"></a-text>
+        <a-plane id="west-arrow" color="#007bb5" height="0.2" width="0.8" rotation="0 -90 0"></a-plane>
+      </a-entity>
+      
+      <a-camera id="camera" position="0 1.6 0"></a-camera>
     </a-scene>
   </div>
   
@@ -144,44 +70,50 @@
             document.getElementById('start-screen').classList.add('hidden');
             document.getElementById('content-container').classList.remove('hidden');
 
-            // コンテンツが表示された後に視点リセットとホームページボタンの初期化を行う
             initializeContent();
         };
+
+        function initializeContent() {
+            const camera = document.getElementById('camera');
+
+            // カメラの回転に応じて器具名を変更する関数
+            camera.addEventListener('componentchanged', function (event) {
+                if (event.detail.name === 'rotation') {
+                    updateEquipmentText(camera.getAttribute('rotation').y);
+                }
+            });
+        }
+
+        function updateEquipmentText(rotationY) {
+            // カメラの回転に基づいて表示するテキストを変更
+            const northText = document.getElementById('north-text');
+            const eastText = document.getElementById('east-text');
+            const southText = document.getElementById('south-text');
+            const westText = document.getElementById('west-text');
+
+            if (rotationY > 45 && rotationY <= 135) {
+                northText.setAttribute('value', '器具B');
+                eastText.setAttribute('value', '器具C');
+                southText.setAttribute('value', '器具D');
+                westText.setAttribute('value', '器具A');
+            } else if (rotationY > 135 && rotationY <= 225) {
+                northText.setAttribute('value', '器具C');
+                eastText.setAttribute('value', '器具D');
+                southText.setAttribute('value', '器具A');
+                westText.setAttribute('value', '器具B');
+            } else if (rotationY > 225 && rotationY <= 315) {
+                northText.setAttribute('value', '器具D');
+                eastText.setAttribute('value', '器具A');
+                southText.setAttribute('value', '器具B');
+                westText.setAttribute('value', '器具C');
+            } else {
+                northText.setAttribute('value', '器具A');
+                eastText.setAttribute('value', '器具B');
+                southText.setAttribute('value', '器具C');
+                westText.setAttribute('value', '器具D');
+            }
+        }
     });
-
-    function initializeContent() {
-        // 必要な要素が正しく取得できるか確認
-        var resetButton = document.getElementById('reset-button');
-        var homeButton = document.getElementById('home-button');
-
-        if (resetButton) {
-            resetButton.addEventListener('click', function() {
-                resetView();
-            });
-        }
-
-        if (homeButton) {
-            homeButton.addEventListener('click', function() {
-                window.goToURL();
-            });
-        }
-    }
-
-    function resetView() {
-        var camera = document.getElementById('camera');
-
-        // look-controls を一時的に無効化
-        camera.removeAttribute('look-controls');
-
-        // カメラの位置と回転をリセット
-        camera.setAttribute('position', { x: 0, y: 1.6, z: 0 });
-        camera.setAttribute('rotation', { x: 0, y: 0, z: 0 });
-
-        // look-controls を再度有効化
-        setTimeout(function() {
-            camera.setAttribute('look-controls', '');
-        }, 100); // 少し遅延させることでリセットが確実に反映されるようにする
-    }
 </script>
 </body>
 </html>
