@@ -9,7 +9,10 @@
 <body>
   <!-- スタート画面のコンテナ -->
   <div id="start-screen" class="start-screen">
+    <!-- タイトル -->
     <div class="start-title">研究室ツアー</div>
+    
+    <!-- 使い方を記入するための長方形コンテナ -->
     <div class="instructions-container">
       <div class="instructions-title">使い方</div>
       <div class="instructions-text">
@@ -19,6 +22,8 @@
         ・"視点リセット"ボタン：最初の視点の方向に戻ります
       </div>
     </div>
+
+    <!-- スタートボタン -->
     <button id="start-button" class="start-button">スタート</button>
   </div>
   
@@ -26,6 +31,7 @@
     <div class="openbtn4">
       <span></span><span></span><span></span>
     </div>
+    
     <div class="button-container" id="button-container">
       <!-- ボタンがここに動的に追加されます -->
     </div>
@@ -36,29 +42,16 @@
       <button id="home-button" class="url-button">ホームページ</button>
     </div>
   
+    <!-- 矢印と説明 -->
+    <div id="arrow-left" class="arrow">←</div>
+    <div id="arrow-right" class="arrow">→</div>
+    <div id="equipment-description" class="equipment-description">北の器具: プロジェクター</div>
+
     <a-scene>
-      <!-- 4方向の矢印 -->
-      <a-entity position="0 2 -3">
-        <a-text id="north-text" value="器具A" position="0 0.5 0"></a-text>
-        <a-plane id="north-arrow" color="#007bb5" height="0.2" width="0.8" rotation="0 0 0"></a-plane>
+      <a-sky id="image" src="1214820_m.jpg"></a-sky>
+      <a-entity id="camera-wrapper">
+        <a-camera id="camera" position="0 1.6 0"></a-camera>
       </a-entity>
-
-      <a-entity position="3 2 0">
-        <a-text id="east-text" value="器具B" position="0 0.5 0"></a-text>
-        <a-plane id="east-arrow" color="#007bb5" height="0.2" width="0.8" rotation="0 90 0"></a-plane>
-      </a-entity>
-
-      <a-entity position="0 2 3">
-        <a-text id="south-text" value="器具C" position="0 0.5 0"></a-text>
-        <a-plane id="south-arrow" color="#007bb5" height="0.2" width="0.8" rotation="0 180 0"></a-plane>
-      </a-entity>
-
-      <a-entity position="-3 2 0">
-        <a-text id="west-text" value="器具D" position="0 0.5 0"></a-text>
-        <a-plane id="west-arrow" color="#007bb5" height="0.2" width="0.8" rotation="0 -90 0"></a-plane>
-      </a-entity>
-      
-      <a-camera id="camera" position="0 1.6 0"></a-camera>
     </a-scene>
   </div>
   
@@ -70,50 +63,72 @@
             document.getElementById('start-screen').classList.add('hidden');
             document.getElementById('content-container').classList.remove('hidden');
 
+            // コンテンツが表示された後に視点リセットとホームページボタンの初期化を行う
             initializeContent();
         };
 
-        function initializeContent() {
-            const camera = document.getElementById('camera');
+        // 方角に応じた器具の説明を設定
+        const descriptions = {
+            north: "北の器具: プロジェクター",
+            east: "東の器具: ホワイトボード",
+            south: "南の器具: 実験台",
+            west: "西の器具: 書棚"
+        };
+        let currentDirection = 'north'; // 初期設定は北
 
-            // カメラの回転に応じて器具名を変更する関数
-            camera.addEventListener('componentchanged', function (event) {
-                if (event.detail.name === 'rotation') {
-                    updateEquipmentText(camera.getAttribute('rotation').y);
-                }
+        function updateDescription() {
+            const descriptionElement = document.getElementById('equipment-description');
+            descriptionElement.innerText = descriptions[currentDirection];
+        }
+
+        // 矢印クリックで方角を変更
+        document.getElementById('arrow-left').onclick = function() {
+            switch (currentDirection) {
+                case 'north': currentDirection = 'west'; break;
+                case 'west': currentDirection = 'south'; break;
+                case 'south': currentDirection = 'east'; break;
+                case 'east': currentDirection = 'north'; break;
+            }
+            updateDescription();
+        };
+
+        document.getElementById('arrow-right').onclick = function() {
+            switch (currentDirection) {
+                case 'north': currentDirection = 'east'; break;
+                case 'east': currentDirection = 'south'; break;
+                case 'south': currentDirection = 'west'; break;
+                case 'west': currentDirection = 'north'; break;
+            }
+            updateDescription();
+        };
+    });
+
+    function initializeContent() {
+        var resetButton = document.getElementById('reset-button');
+        var homeButton = document.getElementById('home-button');
+
+        if (resetButton) {
+            resetButton.addEventListener('click', function() {
+                resetView();
             });
         }
 
-        function updateEquipmentText(rotationY) {
-            // カメラの回転に基づいて表示するテキストを変更
-            const northText = document.getElementById('north-text');
-            const eastText = document.getElementById('east-text');
-            const southText = document.getElementById('south-text');
-            const westText = document.getElementById('west-text');
-
-            if (rotationY > 45 && rotationY <= 135) {
-                northText.setAttribute('value', '器具B');
-                eastText.setAttribute('value', '器具C');
-                southText.setAttribute('value', '器具D');
-                westText.setAttribute('value', '器具A');
-            } else if (rotationY > 135 && rotationY <= 225) {
-                northText.setAttribute('value', '器具C');
-                eastText.setAttribute('value', '器具D');
-                southText.setAttribute('value', '器具A');
-                westText.setAttribute('value', '器具B');
-            } else if (rotationY > 225 && rotationY <= 315) {
-                northText.setAttribute('value', '器具D');
-                eastText.setAttribute('value', '器具A');
-                southText.setAttribute('value', '器具B');
-                westText.setAttribute('value', '器具C');
-            } else {
-                northText.setAttribute('value', '器具A');
-                eastText.setAttribute('value', '器具B');
-                southText.setAttribute('value', '器具C');
-                westText.setAttribute('value', '器具D');
-            }
+        if (homeButton) {
+            homeButton.addEventListener('click', function() {
+                window.goToURL();
+            });
         }
-    });
+    }
+
+    function resetView() {
+        var camera = document.getElementById('camera');
+        camera.removeAttribute('look-controls');
+        camera.setAttribute('position', { x: 0, y: 1.6, z: 0 });
+        camera.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+        setTimeout(function() {
+            camera.setAttribute('look-controls', '');
+        }, 100);
+    }
 </script>
 </body>
 </html>
