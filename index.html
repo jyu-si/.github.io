@@ -5,62 +5,6 @@
   <title>testkita</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* スタート画面のスタイル */
-    .start-screen {
-      background-color: #E0F7FA; /* 薄い水色の背景 */
-      position: fixed;
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .start-title {
-      font-size: 48px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    /* 中央に配置 */
-    .instructions-container {
-      background-color: #FFFFFF;
-      width: 60%;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      margin: 0 auto; /* 水平中央に配置 */
-    }
-
-    .instructions-title {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .instructions-text {
-      font-size: 16px; /* 使い方よりも小さく設定 */
-      line-height: 1.5;
-    }
-
-    .start-button {
-      padding: 15px 30px;
-      font-size: 24px;
-      background-color: #008CBA;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 20px; /* ボタンを中央に配置するために調整 */
-      margin-bottom: 20px;
-    }
-
-    .start-button:hover {
-      background-color: #007bb5;
-    }
-  </style>
 </head>
 <body>
   <!-- スタート画面のコンテナ -->
@@ -104,7 +48,7 @@
         <a-camera id="camera" position="0 1.6 0"></a-camera>
       </a-entity>
       <a-entity position="0 2.8 -2">
-        <!-- テキストの背景として透明度50%の白いプレーンを追加 (少し奥に配置) -->
+        <!-- テキストの背景として透明度50%の白いプレーンを追加 -->
         <a-plane color="#FFFFFF" opacity="0.35" width="3.5" height="1.5" position="0 0.1 -0.01"></a-plane>
   
         <!-- idのテキスト -->
