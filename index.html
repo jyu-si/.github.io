@@ -5,14 +5,98 @@
   <title>testkita</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* スタート画面のスタイル */
+    .start-screen {
+      background-color: #E0F7FA;
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .start-title {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .instructions-container {
+      background-color: #FFFFFF;
+      width: 60%;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .instructions-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .instructions-text {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .start-button {
+      padding: 15px 30px;
+      font-size: 24px;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: auto;
+      margin-bottom: 20px;
+    }
+
+    .start-button:hover {
+      background-color: #007bb5;
+    }
+
+    /* 矢印のスタイル */
+    .arrow {
+      position: fixed;
+      font-size: 48px;
+      color: white;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    #arrow-left {
+      left: 20px;
+      top: 50%;
+    }
+
+    #arrow-right {
+      right: 20px;
+      top: 50%;
+    }
+
+    .equipment-description {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 24px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
   <!-- スタート画面のコンテナ -->
   <div id="start-screen" class="start-screen">
-    <!-- タイトル -->
     <div class="start-title">研究室ツアー</div>
-    
-    <!-- 使い方を記入するための長方形コンテナ -->
+
     <div class="instructions-container">
       <div class="instructions-title">使い方</div>
       <div class="instructions-text">
@@ -23,29 +107,14 @@
       </div>
     </div>
 
-    <!-- スタートボタン -->
     <button id="start-button" class="start-button">スタート</button>
   </div>
-  
+
   <div id="content-container" class="hidden">
-    <div class="openbtn4">
-      <span></span><span></span><span></span>
-    </div>
-    
-    <div class="button-container" id="button-container">
-      <!-- ボタンがここに動的に追加されます -->
-    </div>
-    
-    <!-- URLボタンコンテナ -->
-    <div class="url-button-container">
-      <button id="reset-button" class="url-button">視点リセット</button>
-      <button id="home-button" class="url-button">ホームページ</button> <!-- IDを追加 -->
-    </div>
-    
     <!-- 左右矢印 -->
     <div id="arrow-left" class="arrow">←</div>
     <div id="arrow-right" class="arrow">→</div>
-    
+
     <!-- 方角ごとの説明を表示するテキスト -->
     <div id="equipment-description" class="equipment-description">北の器具: プロジェクター</div>
 
@@ -54,9 +123,31 @@
       <a-entity id="camera-wrapper">
         <a-camera id="camera" position="0 1.6 0"></a-camera>
       </a-entity>
+      <a-entity position="0 2.8 -2">
+        <!-- 透明度のある白いプレーン -->
+        <a-plane color="#FFFFFF" opacity="0.35" width="3.5" height="1.5" position="0 0.1 -0.01"></a-plane>
+
+        <!-- idのテキスト -->
+        <a-text id="id-text" 
+                value="視覚メディア研"
+                align="center" 
+                color="#000000" 
+                width="6" 
+                position="0 0.3 0">
+        </a-text>
+
+        <!-- labelのテキスト -->
+        <a-text id="label-text" 
+                value="今井研究室"  
+                align="center" 
+                color="#000000" 
+                width="4"  
+                position="1.0 -0.2 0">
+        </a-text>
+      </a-entity>
     </a-scene>
   </div>
-  
+
 <script src="hum.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -76,14 +167,13 @@
             south: "南の器具: 実験台",
             west: "西の器具: 書棚"
         };
-        let currentDirection = 'north'; // 初期設定は北
+        let currentDirection = 'north';
 
         function updateDescription() {
             const descriptionElement = document.getElementById('equipment-description');
             descriptionElement.innerText = descriptions[currentDirection];
         }
 
-        // 矢印クリックで方角を変更
         document.getElementById('arrow-left').onclick = function() {
             switch (currentDirection) {
                 case 'north': currentDirection = 'west'; break;
@@ -125,17 +215,14 @@
     function resetView() {
         var camera = document.getElementById('camera');
 
-        // look-controls を一時的に無効化
         camera.removeAttribute('look-controls');
 
-        // カメラの位置と回転をリセット
         camera.setAttribute('position', { x: 0, y: 1.6, z: 0 });
         camera.setAttribute('rotation', { x: 0, y: 0, z: 0 });
 
-        // look-controls を再度有効化
         setTimeout(function() {
             camera.setAttribute('look-controls', '');
-        }, 100); // 少し遅延させることでリセットが確実に反映されるようにする
+        }, 100);
     }
 </script>
 </body>
