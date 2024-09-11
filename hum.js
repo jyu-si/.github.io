@@ -10,27 +10,34 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('start-screen').classList.add('hidden');
         document.getElementById('content-container').classList.remove('hidden');
 
+        // 必要なDOM要素を取得
+        var buttonContainer = document.getElementById('button-container');
+        var menuButton = document.querySelector('.openbtn4');
+
         // JSONファイルを読み込む処理
         fetch('data.json')
           .then(response => response.json())
           .then(data => {
             imageData = data.images;  // JSONデータを格納
-            setupButtons();
+            if (buttonContainer) {
+              setupButtons(buttonContainer);
+            } else {
+              console.error('Error: button-containerが存在しません');
+            }
             loadImage(currentImage);
           })
           .catch(error => console.error('Error:', error));
+
+        // メニューの初期化
+        if (menuButton) {
+            menuButton.addEventListener('click', toggleMenu);
+        } else {
+            console.error('Error: ハンバーガーボタンが存在しません');
+        }
     };
 
     // ボタンを動的に生成する関数
-    function setupButtons() {
-        var buttonContainer = document.getElementById('button-container');
-        
-        // buttonContainerが存在するか確認
-        if (!buttonContainer) {
-            console.error('Error: button-containerが存在しません');
-            return; // buttonContainerが存在しない場合、処理をスキップ
-        }
-
+    function setupButtons(buttonContainer) {
         buttonContainer.innerHTML = ''; // ボタンコンテナをクリア
         imageData.forEach(image => {
             var button = document.createElement('button');
@@ -102,13 +109,5 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             console.error('Error: メニューが存在しません');
         }
-    }
-
-    // ハンバーガーボタンにクリックイベントを設定
-    var menuButton = document.querySelector('.openbtn4');
-    if (menuButton) {
-        menuButton.addEventListener('click', toggleMenu);
-    } else {
-        console.error('Error: ハンバーガーボタンが存在しません');
     }
 });
