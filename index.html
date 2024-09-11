@@ -16,6 +16,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      z-index: 10; /* スタート画面を前面に */
     }
 
     .start-title {
@@ -66,7 +67,7 @@
       font-size: 48px;
       color: white;
       cursor: pointer;
-      z-index: 10;
+      z-index: 5; /* A-Frame要素よりも前に表示 */
     }
 
     #arrow-left {
@@ -79,6 +80,7 @@
       top: 50%;
     }
 
+    /* 方角ごとの説明を表示するテキスト */
     .equipment-description {
       position: fixed;
       top: 10px;
@@ -89,6 +91,76 @@
       background-color: rgba(0, 0, 0, 0.5);
       padding: 10px;
       border-radius: 10px;
+      z-index: 5;
+    }
+
+    /* ハンバーガーメニューのスタイル */
+    .openbtn4 {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 6; /* ハンバーガーボタンを前面に */
+      background: #4CAF50;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+    }
+
+    .openbtn4 span {
+      display: inline-block;
+      transition: all 0.4s;
+      position: absolute;
+      left: 14px;
+      height: 2px;
+      border-radius: 5px;
+      background: #fff;
+      width: 45%;
+    }
+
+    .openbtn4 span:nth-of-type(1) {
+      top: 13px;
+    }
+
+    .openbtn4 span:nth-of-type(2) {
+      top: 19px;
+    }
+
+    .openbtn4 span:nth-of-type(3) {
+      top: 25px;
+    }
+
+    /* ボタンやテキストを前面に表示するためのZ-index調整 */
+    .url-button-container {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      z-index: 6;
+    }
+
+    .url-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .url-button:hover {
+      background-color: #007bb5;
+    }
+
+    /* 研究室名テキストのスタイル */
+    #id-text, #label-text {
+      position: fixed;
+      z-index: 6; /* A-Frame要素の前にテキストを表示 */
+    }
+
+    /* 透明プレーンのスタイル */
+    a-plane {
+      z-index: 1;
     }
   </style>
 </head>
