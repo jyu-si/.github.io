@@ -5,30 +5,46 @@ document.addEventListener('DOMContentLoaded', function() {
     var initialCameraRotation = { x: 0, y: 0, z: 0 };
     var imageData = [];
 
-    fetch('data.json')
-      .then(response => response.json())
-      .then(data => {
-        imageData = data.images;  // JSONデータを格納
-        setupButtons();
-        loadImage(currentImage);
-      })
-      .catch(error => console.error('Error:', error));
+    // スタートボタンが押された時にコンテンツを初期化
+    document.getElementById('start-button').onclick = function() {
+        document.getElementById('start-screen').classList.add('hidden');
+        document.getElementById('content-container').classList.remove('hidden');
 
+        // JSONファイルを読み込む処理
+        fetch('data.json')
+          .then(response => response.json())
+          .then(data => {
+            imageData = data.images;  // JSONデータを格納
+            setupButtons();
+            loadImage(currentImage);
+          })
+          .catch(error => console.error('Error:', error));
+    };
+
+    // ボタンを動的に生成する関数
     function setupButtons() {
         var buttonContainer = document.getElementById('button-container');
-        buttonContainer.innerHTML = '';
+        
+        // buttonContainerが存在するか確認
+        if (!buttonContainer) {
+            console.error('Error: button-containerが存在しません');
+            return; // buttonContainerが存在しない場合、処理をスキップ
+        }
+
+        buttonContainer.innerHTML = ''; // ボタンコンテナをクリア
         imageData.forEach(image => {
             var button = document.createElement('button');
             button.className = 'switch-button';
             button.innerText = image.label;
             button.onclick = () => {
                 switchImage(image.id);
-                toggleMenu();
+                toggleMenu(); // メニューを閉じる
             };
             buttonContainer.appendChild(button);
         });
     }
 
+    // 画像を切り替える関数
     function switchImage(id) {
         var image = imageData.find(img => img.id === id);
         if (image) {
@@ -39,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // 初期画像を読み込む関数
     function loadImage(id) {
         var image = imageData.find(img => img.id === id);
         if (image) {
@@ -48,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // 現在表示されている画像のURLに遷移する関数
     window.goToURL = function() {
         var image = imageData.find(img => img.id === currentImage);
         if (image) {
@@ -55,20 +73,42 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
+    // 初期状態に視点をリセットする関数
     window.resetView = function() {
         var camera = document.getElementById('camera');
+
+        // look-controls を一時的に無効化
         camera.removeAttribute('look-controls');
+
+        // カメラの位置と回転をリセット
         camera.setAttribute('position', initialCameraPosition);
         camera.setAttribute('rotation', initialCameraRotation);
+
+        // look-controls を再度有効化
         setTimeout(function() {
             camera.setAttribute('look-controls', '');
-        }, 100);
+        }, 100); // 少し遅延させることでリセットが確実に反映されるようにする
     };
 
+    // メニューをトグルする関数
     function toggleMenu() {
-        document.querySelector('.openbtn4').classList.toggle('active');
-        document.getElementById('button-container').classList.toggle('show');
+        var menuButton = document.querySelector('.openbtn4');
+        var buttonContainer = document.getElementById('button-container');
+        
+        // メニューが存在するか確認
+        if (menuButton && buttonContainer) {
+            menuButton.classList.toggle('active');
+            buttonContainer.classList.toggle('show');
+        } else {
+            console.error('Error: メニューが存在しません');
+        }
     }
 
-    document.querySelector('.openbtn4').addEventListener('click', toggleMenu);
+    // ハンバーガーボタンにクリックイベントを設定
+    var menuButton = document.querySelector('.openbtn4');
+    if (menuButton) {
+        menuButton.addEventListener('click', toggleMenu);
+    } else {
+        console.error('Error: ハンバーガーボタンが存在しません');
+    }
 });
