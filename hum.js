@@ -1,53 +1,37 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var initialImage = '松延研究室'; // 初期画像のIDを設定
+    // 初期画像のIDを設定
+    var initialImage = '松延研究室'; // 初期画像のIDを保存
     var currentImage = initialImage;
-    var initialCameraPosition = { x: 0, y: 1.6, z: 0 }; // 初期カメラの位置と向き
+    // 初期カメラの位置と向きを保存
+    var initialCameraPosition = { x: 0, y: 1.6, z: 0 };
     var initialCameraRotation = { x: 0, y: 0, z: 0 };
+    // 画像データを格納する配列
     var imageData = [];
 
-    // スタートボタンが押された時にコンテンツを初期化
-    document.getElementById('start-button').onclick = function() {
-        document.getElementById('start-screen').classList.add('hidden');
-        document.getElementById('content-container').classList.remove('hidden');
-
-        // 必要なDOM要素を取得
-        var buttonContainer = document.getElementById('button-container');
-        var menuButton = document.querySelector('.openbtn4');
-
-        // JSONファイルを読み込む処理
-        fetch('data.json')
-          .then(response => response.json())
-          .then(data => {
-            imageData = data.images;  // JSONデータを格納
-            if (buttonContainer) {
-              setupButtons(buttonContainer);
-            } else {
-              console.error('Error: button-containerが存在しません');
-            }
-            loadImage(currentImage);
-          })
-          .catch(error => console.error('Error:', error));
-
-        // メニューの初期化
-        if (menuButton) {
-            menuButton.addEventListener('click', toggleMenu);
-        } else {
-            console.error('Error: ハンバーガーボタンが存在しません');
-        }
-    };
+    // JSONファイルを読み込む処理
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        imageData = data.images;  // JSONデータを配列に格納
+        setupButtons();           // ボタンをセットアップ
+        loadImage(currentImage);  // 初期画像を表示
+      })
+      .catch(error => console.error('Error:', error));
 
     // ボタンを動的に生成する関数
-    function setupButtons(buttonContainer) {
-        buttonContainer.innerHTML = ''; // ボタンコンテナをクリア
+    function setupButtons() {
+        var buttonContainer = document.getElementById('button-container');
+        buttonContainer.innerHTML = ''; // 既存のボタンをクリア
         imageData.forEach(image => {
+            // 各ラベルに対応するボタンを生成
             var button = document.createElement('button');
             button.className = 'switch-button';
-            button.innerText = image.label;
+            button.innerText = image.label;  // ボタンには "label" を使用
             button.onclick = () => {
                 switchImage(image.id);
-                toggleMenu(); // メニューを閉じる
+                toggleMenu();  // 研究室選択時にメニューを閉じる
             };
-            buttonContainer.appendChild(button);
+            buttonContainer.appendChild(button);  // ボタンをコンテナに追加
         });
     }
 
@@ -56,8 +40,17 @@ document.addEventListener('DOMContentLoaded', function() {
         var image = imageData.find(img => img.id === id);
         if (image) {
             document.getElementById('image').setAttribute('src', image.src);
-            document.getElementById('id-text').setAttribute('value', image.id);
-            document.getElementById('label-text').setAttribute('value', image.label);
+    
+            var idText = document.getElementById('id-text');
+            var labelText = document.getElementById('label-text');
+    
+            if (idText && labelText) {
+                idText.setAttribute('value', image.id);
+                labelText.setAttribute('value', image.label);
+            } else {
+                console.error('id-text または label-text 要素が見つかりません');
+            }
+    
             currentImage = id;
         }
     }
@@ -67,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var image = imageData.find(img => img.id === id);
         if (image) {
             document.getElementById('image').setAttribute('src', image.src);
+            // 初期表示でも id と label を設定
             document.getElementById('id-text').setAttribute('value', image.id);
             document.getElementById('label-text').setAttribute('value', image.label);
         }
@@ -99,15 +93,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // メニューをトグルする関数
     function toggleMenu() {
-        var menuButton = document.querySelector('.openbtn4');
-        var buttonContainer = document.getElementById('button-container');
-        
-        // メニューが存在するか確認
-        if (menuButton && buttonContainer) {
-            menuButton.classList.toggle('active');
-            buttonContainer.classList.toggle('show');
-        } else {
-            console.error('Error: メニューが存在しません');
-        }
+        document.querySelector('.openbtn4').classList.toggle('active');
+        document.getElementById('button-container').classList.toggle('show');
     }
+
+    // ハンバーガーボタンにクリックイベントを設定
+    document.querySelector('.openbtn4').addEventListener('click', toggleMenu);
 });
