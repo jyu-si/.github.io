@@ -1,3 +1,10 @@
+body {
+  margin: 0;
+  overflow: hidden; /* スクロールバーを非表示にする */
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+
 /* スタート画面のスタイル */
 .start-screen {
   background-color: #E0F7FA; /* 薄い水色の背景 */
@@ -5,82 +12,159 @@
   width: 100%;
   height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.start-title {
-  font-size: 48px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.instructions-container {
-  background-color: #FFFFFF;
-  width: 60%;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  margin: 0 auto;
-}
-
-.instructions-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.instructions-text {
-  font-size: 16px;
-  line-height: 1.5;
-}
-
 .start-button {
-  padding: 15px 30px;
+  padding: 20px 40px;
   font-size: 24px;
   background-color: #008CBA;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 .start-button:hover {
   background-color: #007bb5;
 }
 
-/* 矢印のスタイル */
-.arrow {
-  position: absolute;
-  font-size: 36px;
-  color: white;
-  cursor: pointer;
+
+.hidden {
+  display: none;
 }
 
-#arrow-left {
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-}
+/* 既存のCSSスタイルをここに追加します... */
 
-#arrow-right {
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-}
 
-.equipment-description {
+/* ハンバーガーボタンのスタイル */
+.openbtn4 {
   position: absolute;
   top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  font-size: 24px;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  border-radius: 10px;
+  left: 10px;
+  z-index: 2;
+  background:#4CAF50;
+  cursor: pointer;
+  width: 50px;
+  height:50px;
+  border-radius: 5px;
 }
 
+.openbtn4 span {
+  display: inline-block;
+  transition: all .4s; /* トランジションのスピードを設定 */
+  position: absolute;
+  left: 14px;
+  height: 2px;
+  border-radius: 5px;
+  background: #fff;
+  width: 45%;
+}
+
+/* 各span要素の位置を調整 */
+.openbtn4 span:nth-of-type(1) {
+  top: 13px; 
+}
+
+.openbtn4 span:nth-of-type(2) {
+  top: 19px;
+}
+
+.openbtn4 span:nth-of-type(3) {
+  top: 25px;
+}
+
+/* メニューラベルの追加 */
+.openbtn4 span:nth-of-type(3)::after {
+  content: "Menu";
+  position: absolute;
+  top: 5px;
+  left: -2px;
+  color: #fff;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+}
+
+/* activeクラスが付与された時のスタイル */
+.openbtn4.active span:nth-of-type(1) {
+  top: 14px;
+  left: 18px;
+  transform: translateY(6px) rotate(-45deg);
+  width: 30%;
+}
+
+.openbtn4.active span:nth-of-type(2) {
+  opacity: 0;
+}
+
+.openbtn4.active span:nth-of-type(3) {
+  top: 26px;
+  left: 18px;
+  transform: translateY(-6px) rotate(45deg);
+  width: 30%;
+}
+
+/* activeクラスが付与された際のラベルを変更 */
+.openbtn4.active span:nth-of-type(3)::after {
+  content: "Close";
+  transform: translateY(0) rotate(-45deg);
+  top: 5px;
+  left: 4px;
+}
+
+/* ボタンコンテナのスタイル */
+.button-container {
+  position: absolute;
+  top: 70px;
+  left: 10px;
+  z-index: 1;
+  display: none;
+  flex-direction: column;
+}
+
+/* コンテナが表示されたときのスタイル */
+.button-container.show {
+  display: flex;
+}
+
+/* スイッチボタンのスタイル */
+.switch-button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* スイッチボタンのホバー時のスタイル */
+.switch-button:hover {
+  background-color: #45a049;
+}
+
+/* URLボタンコンテナのスタイル */
+.url-button-container {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 2;
+}
+
+/* URLボタンのスタイル */
+.url-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* URLボタンのホバー時のスタイル */
+.url-button:hover {
+  background-color: #007bb5;
+}
