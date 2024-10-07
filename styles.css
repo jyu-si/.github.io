@@ -169,19 +169,29 @@ body {
   background-color: #007bb5;
 }
 
-/* 左矢印 */
+/* 左矢印を左端の上下中央に配置 */
 .left-arrow {
   position: absolute;
   top: 50%;
-  left: 10px;
+  left: 0;
   transform: translateY(-50%);
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  background-color: #1E88E5;
+  clip-path: polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%);
 }
 
-/* 右矢印 */
+/* 右矢印を右端の上下中央に配置 */
 .right-arrow {
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: 0;
   transform: translateY(-50%);
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  background-color: #1E88E5;
+  clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
 }
 
