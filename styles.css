@@ -168,3 +168,20 @@ body {
 .url-button:hover {
   background-color: #007bb5;
 }
+
+/* 左矢印 */
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+}
+
+/* 右矢印 */
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
