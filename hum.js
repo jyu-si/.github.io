@@ -15,6 +15,21 @@ document.addEventListener('DOMContentLoaded', function() {
         imageData = data.images;  // JSONデータを配列に格納
         setupButtons();           // ボタンをセットアップ
         loadImage(currentImage);  // 初期画像を表示
+
+        // 方向テキストの設定
+        var directions = data.directions;
+
+        // "西" のテキストを設定
+        var westText = document.getElementById('west-text');
+        if (westText) {
+            westText.setAttribute('value', directions.west.id);
+        }
+
+        // "東" のテキストを設定
+        var eastText = document.getElementById('east-text');
+        if (eastText) {
+            eastText.setAttribute('value', directions.east.id);
+        }
       })
       .catch(error => console.error('Error:', error));
 
@@ -100,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ハンバーガーボタンにクリックイベントを設定
     document.querySelector('.openbtn4').addEventListener('click', toggleMenu);
 
-    // ★ここに追加: スマートフォンの場合のサイズ調整
+    // ★スマートフォンの場合のサイズ調整
     var isMobile = window.innerWidth <= 768; // 画面幅が768px以下の場合はモバイルと判定
     var plane = document.querySelector('a-plane');
     var idText = document.getElementById('id-text');
