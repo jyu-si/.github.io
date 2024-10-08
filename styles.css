@@ -213,17 +213,3 @@ body {
   top: 50%;
   transform: translateY(-50%);
 }
-
-/* 北方向ボタン */
-#north-button {
-  left: 50%;
-  transform: translateX(-50%);
-  top: 10px;
-}
-
-/* 南方向ボタン */
-#south-button {
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 10px;
-}
