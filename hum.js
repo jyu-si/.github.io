@@ -125,9 +125,11 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             var directions = data.directions;
             
-            // 東と西のボタンに対応するIDを設定
+            // 各ボタンに対応する方向のIDを設定
             document.getElementById('east-button').innerText = directions.east.id;
             document.getElementById('west-button').innerText = directions.west.id;
+            document.getElementById('north-button').innerText = directions.north.id;
+            document.getElementById('south-button').innerText = directions.south.id;
         })
         .catch(error => console.error('Error:', error));
     }
