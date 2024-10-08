@@ -91,33 +91,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
     };
 
-    // メニューをトグルする関数
-    function toggleMenu() {
-        document.querySelector('.openbtn4').classList.toggle('active');
-        document.getElementById('button-container').classList.toggle('show');
-    }
-
-    // ハンバーガーボタンにクリックイベントを設定
-    document.querySelector('.openbtn4').addEventListener('click', toggleMenu);
-
-    // スマートフォンの場合のサイズ調整
-    var isMobile = window.innerWidth <= 768; // 画面幅が768px以下の場合はモバイルと判定
-    var plane = document.querySelector('a-plane');
-    var idText = document.getElementById('id-text');
-    var labelText = document.getElementById('label-text');
-    
-    if (isMobile) {
-        plane.setAttribute('width', '2.5');
-        plane.setAttribute('height', '1');
-        idText.setAttribute('scale', '1.5 1.5 1');
-        labelText.setAttribute('scale', '1 1 1');
-    } else {
-        plane.setAttribute('width', '3.5');
-        plane.setAttribute('height', '1.5');
-        idText.setAttribute('scale', '2 2 1');
-        labelText.setAttribute('scale', '1.2 1.2 1');
-    }
-
     // 方向ボタンをセットアップする関数
     function setupDirectionButtons() {
         fetch('data.json')
@@ -128,8 +101,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // 各ボタンに対応する方向のIDを設定
             document.getElementById('east-button').innerText = directions.east.id;
             document.getElementById('west-button').innerText = directions.west.id;
-            document.getElementById('north-button').innerText = directions.north.id;
-            document.getElementById('south-button').innerText = directions.south.id;
         })
         .catch(error => console.error('Error:', error));
     }
