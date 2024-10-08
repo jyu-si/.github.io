@@ -190,3 +190,11 @@ body {
   right: 0;
   clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
 }
+/* 矢印とテキストの調整 */
+#west-text, #east-text {
+  position: absolute;
+  top: 45%; /* 矢印の少し上 */
+  color: white;
+  font-size: 24px;
+  z-index: 1000;
+}
