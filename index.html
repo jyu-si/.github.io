@@ -39,7 +39,7 @@
     <!-- URLボタンコンテナ -->
     <div class="url-button-container">
       <button id="reset-button" class="url-button">視点リセット</button>
-      <button id="home-button" class="url-button">ホームページ</button> <!-- IDを追加 -->
+      <button id="home-button" class="url-button">ホームページ</button>
     </div>
 
     <!-- 左右矢印を追加 -->
@@ -48,10 +48,6 @@
     
     <div class="arrow-clippath right-arrow"></div>
     <button id="east-button" class="direction-button">東</button>
-
-    <!-- 上下方向のボタンを追加 -->
-    <button id="north-button" class="direction-button" style="top: 10px;">北</button>
-    <button id="south-button" class="direction-button" style="bottom: 10px;">南</button>
   
     <a-scene>
       <a-sky id="image" src="1214820_m.jpg"></a-sky>
@@ -148,8 +144,6 @@
             // 各ボタンに対応する方向のIDを設定
             document.getElementById('east-button').innerText = directions.east.id;
             document.getElementById('west-button').innerText = directions.west.id;
-            document.getElementById('north-button').innerText = directions.north.id;
-            document.getElementById('south-button').innerText = directions.south.id;
         })
         .catch(error => console.error('Error:', error));
     }
