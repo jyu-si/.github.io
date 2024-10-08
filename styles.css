@@ -58,6 +58,7 @@ body {
   width: 45%;
 }
 
+/* 各span要素の位置を調整 */
 .openbtn4 span:nth-of-type(1) {
   top: 13px; 
 }
@@ -70,6 +71,7 @@ body {
   top: 25px;
 }
 
+/* メニューラベルの追加 */
 .openbtn4 span:nth-of-type(3)::after {
   content: "Menu";
   position: absolute;
@@ -158,6 +160,7 @@ body {
   border-radius: 5px;
 }
 
+/* URLボタンのホバー時のスタイル */
 .url-button:hover {
   background-color: #007bb5;
 }
@@ -184,20 +187,43 @@ body {
   clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
 }
 
-/* 左右矢印のテキストスタイル */
-.arrow-text {
+/* 矢印の上に配置されるボタン */
+.direction-button {
   position: absolute;
+  z-index: 1000; /* 矢印よりも前に表示 */
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
   color: white;
-  font-size: 18px;
-  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
-.left-text {
-  left: 10px; /* 左矢印の近くにテキストを表示 */
-  top: 40%; /* 矢印の上にテキストを表示 */
+/* 左矢印の上に表示するボタン */
+#west-button {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.right-text {
-  right: 10px; /* 右矢印の近くにテキストを表示 */
-  top: 40%; /* 矢印の上にテキストを表示 */
+/* 右矢印の上に表示するボタン */
+#east-button {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 北方向ボタン */
+#north-button {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10px;
+}
+
+/* 南方向ボタン */
+#south-button {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
 }
