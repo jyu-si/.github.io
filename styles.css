@@ -30,13 +30,9 @@ body {
   background-color: #007bb5;
 }
 
-
 .hidden {
   display: none;
 }
-
-/* 既存のCSSスタイルをここに追加します... */
-
 
 /* ハンバーガーボタンのスタイル */
 .openbtn4 {
@@ -44,10 +40,10 @@ body {
   top: 10px;
   left: 10px;
   z-index: 2;
-  background:#4CAF50;
+  background: #4CAF50;
   cursor: pointer;
   width: 50px;
-  height:50px;
+  height: 50px;
   border-radius: 5px;
 }
 
@@ -62,7 +58,6 @@ body {
   width: 45%;
 }
 
-/* 各span要素の位置を調整 */
 .openbtn4 span:nth-of-type(1) {
   top: 13px; 
 }
@@ -75,7 +70,6 @@ body {
   top: 25px;
 }
 
-/* メニューラベルの追加 */
 .openbtn4 span:nth-of-type(3)::after {
   content: "Menu";
   position: absolute;
@@ -164,7 +158,6 @@ body {
   border-radius: 5px;
 }
 
-/* URLボタンのホバー時のスタイル */
 .url-button:hover {
   background-color: #007bb5;
 }
@@ -190,11 +183,21 @@ body {
   right: 0;
   clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
 }
-/* 矢印とテキストの調整 */
-#west-text, #east-text {
+
+/* 左右矢印のテキストスタイル */
+.arrow-text {
   position: absolute;
-  top: 45%; /* 矢印の少し上 */
   color: white;
-  font-size: 24px;
-  z-index: 1000;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.left-text {
+  left: 10px; /* 左矢印の近くにテキストを表示 */
+  top: 40%; /* 矢印の上にテキストを表示 */
+}
+
+.right-text {
+  right: 10px; /* 右矢印の近くにテキストを表示 */
+  top: 40%; /* 矢印の上にテキストを表示 */
 }
