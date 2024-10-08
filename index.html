@@ -42,12 +42,16 @@
       <button id="home-button" class="url-button">ホームページ</button> <!-- IDを追加 -->
     </div>
 
-    <!-- 左右矢印とテキストを追加 -->
+    <!-- 左右矢印を追加 -->
     <div class="arrow-clippath left-arrow"></div>
-    <div class="arrow-text left-text">東</div> <!-- 東のテキストを追加 -->
-
+    <button id="west-button" class="direction-button">西</button>
+    
     <div class="arrow-clippath right-arrow"></div>
-    <div class="arrow-text right-text">西</div> <!-- 西のテキストを追加 -->
+    <button id="east-button" class="direction-button">東</button>
+
+    <!-- 上下方向のボタンを追加 -->
+    <button id="north-button" class="direction-button" style="top: 10px;">北</button>
+    <button id="south-button" class="direction-button" style="bottom: 10px;">南</button>
   
     <a-scene>
       <a-sky id="image" src="1214820_m.jpg"></a-sky>
@@ -133,6 +137,27 @@
             camera.setAttribute('look-controls', '');
         }, 100); // 少し遅延させることでリセットが確実に反映されるようにする
     }
+
+    // 方向ボタンをセットアップする関数
+    function setupDirectionButtons() {
+        fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+            var directions = data.directions;
+            
+            // 各ボタンに対応する方向のIDを設定
+            document.getElementById('east-button').innerText = directions.east.id;
+            document.getElementById('west-button').innerText = directions.west.id;
+            document.getElementById('north-button').innerText = directions.north.id;
+            document.getElementById('south-button').innerText = directions.south.id;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    // DOM読み込み完了後に方向ボタンのセットアップを実行
+    document.addEventListener('DOMContentLoaded', function() {
+        setupDirectionButtons();
+    });
 </script>
 </body>
 </html>
