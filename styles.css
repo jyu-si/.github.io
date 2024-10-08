@@ -58,11 +58,118 @@ body {
   width: 45%;
 }
 
+/* 各span要素の位置を調整 */
+.openbtn4 span:nth-of-type(1) {
+  top: 13px; 
+}
+
+.openbtn4 span:nth-of-type(2) {
+  top: 19px;
+}
+
+.openbtn4 span:nth-of-type(3) {
+  top: 25px;
+}
+
+/* メニューラベルの追加 */
+.openbtn4 span:nth-of-type(3)::after {
+  content: "Menu";
+  position: absolute;
+  top: 5px;
+  left: -2px;
+  color: #fff;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+}
+
+/* activeクラスが付与された時のスタイル */
+.openbtn4.active span:nth-of-type(1) {
+  top: 14px;
+  left: 18px;
+  transform: translateY(6px) rotate(-45deg);
+  width: 30%;
+}
+
+.openbtn4.active span:nth-of-type(2) {
+  opacity: 0;
+}
+
+.openbtn4.active span:nth-of-type(3) {
+  top: 26px;
+  left: 18px;
+  transform: translateY(-6px) rotate(45deg);
+  width: 30%;
+}
+
+/* activeクラスが付与された際のラベルを変更 */
+.openbtn4.active span:nth-of-type(3)::after {
+  content: "Close";
+  transform: translateY(0) rotate(-45deg);
+  top: 5px;
+  left: 4px;
+}
+
+/* ボタンコンテナのスタイル */
+.button-container {
+  position: absolute;
+  top: 70px;
+  left: 10px;
+  z-index: 1;
+  display: none;
+  flex-direction: column;
+}
+
+/* コンテナが表示されたときのスタイル */
+.button-container.show {
+  display: flex;
+}
+
+/* スイッチボタンのスタイル */
+.switch-button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* スイッチボタンのホバー時のスタイル */
+.switch-button:hover {
+  background-color: #45a049;
+}
+
+/* URLボタンコンテナのスタイル */
+.url-button-container {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 2;
+}
+
+/* URLボタンのスタイル */
+.url-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* URLボタンのホバー時のスタイル */
+.url-button:hover {
+  background-color: #007bb5;
+}
+
 /* 左右矢印のスタイル */
 .left-arrow, .right-arrow {
   z-index: 999; /* 他の要素より前面に表示 */
   position: absolute;
-  top: 45%;  /* 少し下げて矢印の上にボタンが重ならないようにする */
+  top: 50%;
   transform: translateY(-50%);
   display: inline-block;
   width: 48px;
@@ -80,14 +187,14 @@ body {
   clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
 }
 
-/* 共通のボタンスタイル */
+/* 矢印の上に配置されるボタン */
 .direction-button {
   position: absolute;
   z-index: 1000; /* 矢印よりも前に表示 */
   padding: 10px 20px;
   font-size: 16px;
-  color: #000; /* ボタンのテキストを黒に */
-  background-color: transparent; /* 背景を透明に */
+  background-color: #4CAF50;
+  color: white;
   border: none;
   cursor: pointer;
   border-radius: 5px;
@@ -95,17 +202,28 @@ body {
 
 /* 左矢印の上に表示するボタン */
 #west-button {
-  position: absolute;
   left: 0;
-  top: 50%; /* ボタンが上下中央に来るように調整 */
+  top: 50%;
   transform: translateY(-50%);
 }
 
 /* 右矢印の上に表示するボタン */
 #east-button {
-  position: absolute;
   right: 0;
-  top: 50%; /* ボタンが上下中央に来るように調整 */
+  top: 50%;
   transform: translateY(-50%);
 }
 
+/* 北方向ボタン */
+#north-button {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10px;
+}
+
+/* 南方向ボタン */
+#south-button {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+}
