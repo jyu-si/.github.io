@@ -80,14 +80,14 @@ body {
   clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
 }
 
-/* 矢印の上に配置されるボタン */
+/* 共通のボタンスタイル */
 .direction-button {
   position: absolute;
   z-index: 1000; /* 矢印よりも前に表示 */
   padding: 10px 20px;
   font-size: 16px;
-  background-color: rgba(255, 255, 255, 1); /* 背景を完全な白にする */
-  color: black; /* テキストを黒色に設定 */
+  color: #000; /* ボタンのテキストを黒に */
+  background-color: transparent; /* 背景を透明に */
   border: none;
   cursor: pointer;
   border-radius: 5px;
@@ -95,14 +95,17 @@ body {
 
 /* 左矢印の上に表示するボタン */
 #west-button {
-  left: 10px;
-  top: 45%;
+  position: absolute;
+  left: 0;
+  top: 50%; /* ボタンが上下中央に来るように調整 */
   transform: translateY(-50%);
 }
 
 /* 右矢印の上に表示するボタン */
 #east-button {
-  right: 10px;
-  top: 45%;
+  position: absolute;
+  right: 0;
+  top: 50%; /* ボタンが上下中央に来るように調整 */
   transform: translateY(-50%);
 }
+
