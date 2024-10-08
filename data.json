@@ -30,5 +30,23 @@
       "label": "松延研究室",
       "url": "https://mdi-lab.sys.wakayama-u.ac.jp/"
     }
-  ]
+  ],
+  "directions": {
+    "east": {
+      "id": "東",
+      "description": "これは東方向の説明です"
+    },
+    "west": {
+      "id": "西",
+      "description": "これは西方向の説明です"
+    },
+    "south": {
+      "id": "南",
+      "description": "これは南方向の説明です"
+    },
+    "north": {
+      "id": "北",
+      "description": "これは北方向の説明です"
+    }
+  }
 }
