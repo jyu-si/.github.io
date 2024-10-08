@@ -10,7 +10,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // JSONファイルを読み込む処理
     fetch('data.json')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         imageData = data.images;  // JSONデータを配列に格納
         setupButtons();           // ボタンをセットアップ
@@ -31,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
             eastText.setAttribute('value', directions.east.id);
         }
       })
-      .catch(error => console.error('Error:', error));
+      .catch(error => console.error('Fetch error:', error));
 
     // ボタンを動的に生成する関数
     function setupButtons() {
