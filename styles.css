@@ -203,14 +203,14 @@ body {
 /* 左矢印の上に表示するボタン */
 #west-button {
   left: 0;
-  top: 45%;  /* ボタンを少し上に移動 */
+  top: 40%;  /* ボタンを少し上に移動 */
   transform: translateY(-50%);
 }
 
 /* 右矢印の上に表示するボタン */
 #east-button {
   right: 0;
-  top: 45%;  /* ボタンを少し上に移動 */
+  top: 40%;  /* ボタンを少し上に移動 */
   transform: translateY(-50%);
 }
 
