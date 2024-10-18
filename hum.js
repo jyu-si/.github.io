@@ -91,6 +91,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
     };
 
+    // カメラの方向ベクトルを取得する関数
+    function getCameraDirection() {
+        var cameraEl = document.getElementById('camera').object3D;
+        var direction = new THREE.Vector3();
+        cameraEl.getWorldDirection(direction);
+        return direction;
+    }
+
+    // カメラの方向ベクトルを連続的に取得
+    function updateCameraDirection() {
+        var direction = getCameraDirection();
+        console.log("カメラの方向ベクトル: ", direction);
+        requestAnimationFrame(updateCameraDirection); // 次のフレームで再度取得
+    }
+
+    // 最初の呼び出し
+    updateCameraDirection();
+
     // メニューをトグルする関数
     function toggleMenu() {
         document.querySelector('.openbtn4').classList.toggle('active');
