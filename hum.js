@@ -102,7 +102,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // カメラの方向ベクトルを連続的に取得
     function updateCameraDirection() {
         var direction = getCameraDirection();
-        console.log("カメラの方向ベクトル: ", direction);
+
+        // Zの値が負の時は東と西を北と南に変更
+        if (direction.z < 0) {
+            document.getElementById('east-button').innerText = "北";
+            document.getElementById('west-button').innerText = "南";
+        } else {
+            // Zの値が正の時は元に戻す
+            document.getElementById('east-button').innerText = "東";
+            document.getElementById('west-button').innerText = "西";
+        }
+
         requestAnimationFrame(updateCameraDirection); // 次のフレームで再度取得
     }
 
