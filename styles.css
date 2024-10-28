@@ -65,7 +65,7 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
-  z-index: 2;
+  z-index: 5;
   background: #4CAF50;
   cursor: pointer;
   width: 50px;
@@ -193,7 +193,7 @@ body {
 
 /* 左右矢印のスタイル */
 .left-arrow, .right-arrow {
-  z-index: 999; /* 他の要素より前面に表示 */
+  z-index: 3; /* 他の要素より前面に表示 */
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
