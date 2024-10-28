@@ -86,6 +86,16 @@
                 position="1.0 -0.2 0">
         </a-text>
       </a-entity>
+            <!-- カメラとコントローラー -->
+      <a-entity id="camera-wrapper">
+        <a-camera id="camera" position="0 1.6 0"></a-camera>
+      </a-entity>
+      
+      <!-- 特定の場所に見出しを追加 -->
+      <a-entity position="1 2 -3"> <!-- X=1, Y=2, Z=-3の位置に見出しを配置 -->
+        <a-text value="見出し" color="yellow" align="center" scale="2 2 2"></a-text> <!-- 見出しのテキスト -->
+        <a-text value="ここに説明が入ります。" color="white" align="center" scale="1 1 1" position="0 -0.5 0"></a-text> <!-- 説明のテキスト -->
+      </a-entity>
     </a-scene>
   </div>
   
