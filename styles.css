@@ -228,13 +228,13 @@ body {
 /* 左矢印の上に表示するボタン */
 #west-button {
   left: 0;
-  top: 45%;
+  top: 50%;
   transform: translateY(-50%);
 }
 
 /* 右矢印の上に表示するボタン */
 #east-button {
   right: 0;
-  top: 45%;
+  top: 50%;
   transform: translateY(-50%);
 }
