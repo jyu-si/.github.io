@@ -215,7 +215,7 @@ body {
 /* 矢印の上に配置されるボタン */
 .direction-button {
   position: absolute;
-  z-index: 1000;
+  z-index: 2;
   padding: 10px 20px;
   font-size: 16px;
   background-color: transparent;
