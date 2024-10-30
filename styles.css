@@ -214,6 +214,7 @@ body {
 
 /* 矢印の上に配置されるボタン */
 .direction-button {
+  color: white; /* テキストカラーを白に */
   position: absolute;
   z-index: 1000;
   padding: 10px 20px;
