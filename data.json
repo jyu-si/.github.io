@@ -1,21 +1,15 @@
 {
   "images": [
     {
-      "id": "視覚メディア研➀",
-      "src": "1214820_m.jpg",
-      "label": "今井研究室",
+      "id": "視覚メディア研",
+      "src": "tokoi.jpg",
+      "label": "今井・床井研",
       "url": "https://researchers.center.wakayama-u.ac.jp/html/100000632_ja.html"
     },
     {
-      "id": "デザインシステム計画研",
-      "src": "2.jpg",
-      "label": "原田研究室",
-      "url": "https://web.wakayama-u.ac.jp/~harada/"
-    },
-    {
-      "id": "視覚メディア研➁",
-      "src": "27692040_s.jpg",
-      "label": "床井研究室",
+      "id": "VRルーム",
+      "src": "VRRoom.jpg",
+      "label": "VRルーム",
       "url": "https://marina.sys.wakayama-u.ac.jp/~tokoi/"
     },
     {
