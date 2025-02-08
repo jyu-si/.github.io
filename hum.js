@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var initialCameraRotation = { x: 0, y: 0, z: 0 };
     // 画像データを格納する配列
     var imageData = [];
+    var camera = document.getElementById('camera');
+    var currentRotationY = 0; // 現在のカメラのY軸回転角度
 
     // JSONファイルを読み込む処理
     fetch('data.json')
@@ -54,7 +56,31 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // カメラの方向ベクトルを取得する関数
+    // **最も近い90°にスナップする関数**
+    function getNearest90Degree(yRotation) {
+        return Math.round(yRotation / 90) * 90 % 360;
+    }
+
+    // **カメラの回転を設定する関数**
+    function setCameraRotation(yRotation) {
+        camera.setAttribute('rotation', { x: 0, y: yRotation, z: 0 });
+    }
+
+    // **右ボタン（次に近い東西南北方向に回転）**
+    document.getElementById('rotate-right-button').addEventListener('click', function() {
+        currentRotationY += 45; // 45° ずつ増やして境界を超えたら調整
+        currentRotationY = getNearest90Degree(currentRotationY);
+        setCameraRotation(currentRotationY);
+    });
+
+    // **左ボタン（前の東西南北方向に回転）**
+    document.getElementById('rotate-left-button').addEventListener('click', function() {
+        currentRotationY -= 45; // 45° ずつ減らして境界を超えたら調整
+        currentRotationY = getNearest90Degree(currentRotationY);
+        setCameraRotation(currentRotationY);
+    });
+
+    // **カメラの方向ベクトルを取得する関数**
     function getCameraDirection() {
         var cameraEl = document.getElementById('camera').object3D;
         var direction = new THREE.Vector3();
@@ -62,24 +88,20 @@ document.addEventListener('DOMContentLoaded', function() {
         return direction;
     }
 
-    // カメラの方向ベクトルを連続的に取得し、東西ボタンのテキストを更新
+    // **カメラの方向に基づいて東西ボタンのテキストを変更**
     function updateCameraDirection() {
-        var direction = getCameraDirection();
+        var yRotation = getNearest90Degree(currentRotationY); // 90°単位にスナップ
 
-        if (direction.x > 0 && direction.z > 0) {
-            // x > 0, z > 0: 北と東
+        if (yRotation === 0) {
             document.getElementById('east-button').innerText = "北";
             document.getElementById('west-button').innerText = "東";
-        } else if (direction.x > 0 && direction.z < 0) {
-            // x > 0, z < 0: 東と南
+        } else if (yRotation === 90) {
             document.getElementById('east-button').innerText = "東";
             document.getElementById('west-button').innerText = "南";
-        } else if (direction.x < 0 && direction.z < 0) {
-            // x < 0, z < 0: 南と西
+        } else if (yRotation === 180) {
             document.getElementById('east-button').innerText = "南";
             document.getElementById('west-button').innerText = "西";
-        } else if (direction.x < 0 && direction.z > 0) {
-            // x < 0, z > 0: 西と北
+        } else if (yRotation === 270) {
             document.getElementById('east-button').innerText = "西";
             document.getElementById('west-button').innerText = "北";
         }
@@ -87,7 +109,6 @@ document.addEventListener('DOMContentLoaded', function() {
         requestAnimationFrame(updateCameraDirection);
     }
 
-    // 最初の呼び出し
     updateCameraDirection();
 
     // メニューをトグルする関数
