@@ -56,6 +56,39 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // **カメラの方向ベクトルを取得する関数**
+    function getCameraDirection() {
+        var cameraEl = document.getElementById('camera').object3D;
+        var direction = new THREE.Vector3();
+        cameraEl.getWorldDirection(direction);
+        return direction;
+    }
+
+    // **カメラの方向に基づいて東西ボタンのテキストを変更**
+    function updateCameraDirection() {
+        var direction = getCameraDirection(); // カメラの向きのベクトルを取得
+
+        if (direction.x > 0 && direction.z > 0) {
+            // x > 0, z > 0: 北と東
+            document.getElementById('east-button').innerText = "北";
+            document.getElementById('west-button').innerText = "東";
+        } else if (direction.x > 0 && direction.z < 0) {
+            // x > 0, z < 0: 東と南
+            document.getElementById('east-button').innerText = "東";
+            document.getElementById('west-button').innerText = "南";
+        } else if (direction.x < 0 && direction.z < 0) {
+            // x < 0, z < 0: 南と西
+            document.getElementById('east-button').innerText = "南";
+            document.getElementById('west-button').innerText = "西";
+        } else if (direction.x < 0 && direction.z > 0) {
+            // x < 0, z > 0: 西と北
+            document.getElementById('east-button').innerText = "西";
+            document.getElementById('west-button').innerText = "北";
+        }
+
+        requestAnimationFrame(updateCameraDirection);
+    }
+
     // **最も近い90°にスナップする関数**
     function getNearest90Degree(yRotation) {
         return Math.round(yRotation / 90) * 90 % 360;
@@ -79,35 +112,6 @@ document.addEventListener('DOMContentLoaded', function() {
         currentRotationY = getNearest90Degree(currentRotationY);
         setCameraRotation(currentRotationY);
     });
-
-    // **カメラの方向ベクトルを取得する関数**
-    function getCameraDirection() {
-        var cameraEl = document.getElementById('camera').object3D;
-        var direction = new THREE.Vector3();
-        cameraEl.getWorldDirection(direction);
-        return direction;
-    }
-
-    // **カメラの方向に基づいて東西ボタンのテキストを変更**
-    function updateCameraDirection() {
-        var yRotation = getNearest90Degree(currentRotationY); // 90°単位にスナップ
-
-        if (yRotation === 0) {
-            document.getElementById('east-button').innerText = "北";
-            document.getElementById('west-button').innerText = "東";
-        } else if (yRotation === 90) {
-            document.getElementById('east-button').innerText = "東";
-            document.getElementById('west-button').innerText = "南";
-        } else if (yRotation === 180) {
-            document.getElementById('east-button').innerText = "南";
-            document.getElementById('west-button').innerText = "西";
-        } else if (yRotation === 270) {
-            document.getElementById('east-button').innerText = "西";
-            document.getElementById('west-button').innerText = "北";
-        }
-
-        requestAnimationFrame(updateCameraDirection);
-    }
 
     updateCameraDirection();
 
