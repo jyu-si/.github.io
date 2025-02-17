@@ -64,6 +64,19 @@ document.addEventListener('DOMContentLoaded', function() {
         return direction;
     }
 
+    // 画像を読み込む関数を定義
+function loadImage(id) {
+    var image = imageData.find(img => img.id === id);
+    if (image) {
+        document.getElementById('image').setAttribute('src', image.src);
+        document.getElementById('id-text').setAttribute('value', image.id);
+        document.getElementById('label-text').setAttribute('value', image.label);
+    } else {
+        console.error('画像の読み込みに失敗しました: ', id);
+    }
+}
+
+
     // **カメラの方向に基づいて東西ボタンのテキストを変更**
     function updateCameraDirection() {
         var direction = getCameraDirection(); // カメラの向きのベクトルを取得
