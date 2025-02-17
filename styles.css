@@ -194,7 +194,7 @@ body {
 .left-arrow, .right-arrow {
   z-index: 999;
   position: absolute;
-  top: 50%;
+  top: 55%;
   transform: translateY(-50%);
   display: inline-block;
   width: 48px;
@@ -228,7 +228,7 @@ body {
 /* 左矢印の上に表示するボタン */
 #west-button {
   left: 0;
-  top: 45%;
+  top: 55%;
   transform: translateY(-50%);
   color: white;
 }
@@ -236,7 +236,7 @@ body {
 /* 右矢印の上に表示するボタン */
 #east-button {
   right: 0;
-  top: 45%;
+  top: 55%;
   transform: translateY(-50%);
   color: white;
 }
