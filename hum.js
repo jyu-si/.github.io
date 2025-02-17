@@ -100,44 +100,51 @@ document.addEventListener('DOMContentLoaded', function() {
         requestAnimationFrame(updateCameraDirection);
     }
 
-    // 最も近い90°にスナップする関数
+  // ✅ カメラの向きをリアルタイムで取得してログに出力
+    function logCameraAngle() {
+        var yRotation = THREE.MathUtils.radToDeg(camera.rotation.y); // ラジアンを度に変換
+        console.log(`📌 現在のカメラ角度: ${Math.round(yRotation)}°`);
+        requestAnimationFrame(logCameraAngle);
+    }
+
+    logCameraAngle(); // 初回実行
+
+    // ✅ 最も近い90°にスナップする関数
     function getNearest90Degree(yRotation) {
         return Math.round(yRotation / 90) * 90 % 360;
     }
 
-    // カメラの回転を設定する関数
+    // ✅ カメラの回転を設定する関数（`object3D.rotation` を使用）
     function setCameraRotation(yRotation) {
-        console.log(`カメラを ${yRotation}° に回転します`);
-        camera.setAttribute('rotation', { x: 0, y: yRotation, z: 0 });
+        console.log(`📌 カメラを ${yRotation}° に回転します`);
+        camera.rotation.y = THREE.MathUtils.degToRad(yRotation); // 修正：度→ラジアン変換
     }
 
-    // 矢印ボタンをクリックすると最も近い象限境界にスナップする
+    // ✅ 矢印ボタンのクリックイベントを修正
     var westButton = document.getElementById('west-button');
     var eastButton = document.getElementById('east-button');
 
     if (westButton) {
         westButton.addEventListener('click', function() {
-            console.log("西ボタンがクリックされました");
+            console.log("⬅️ 西ボタンがクリックされました");
             currentRotationY -= 45; // 45° 回転
             currentRotationY = getNearest90Degree(currentRotationY); // 90°にスナップ
             setCameraRotation(currentRotationY);
         });
     } else {
-        console.error("west-button が見つかりません！");
+        console.error("❌ west-button が見つかりません！");
     }
 
     if (eastButton) {
         eastButton.addEventListener('click', function() {
-            console.log("東ボタンがクリックされました");
+            console.log("➡️ 東ボタンがクリックされました");
             currentRotationY += 45; // 45° 回転
             currentRotationY = getNearest90Degree(currentRotationY); // 90°にスナップ
             setCameraRotation(currentRotationY);
         });
     } else {
-        console.error("east-button が見つかりません！");
+        console.error("❌ east-button が見つかりません！");
     }
-
-    updateCameraDirection();
 
     // メニューをトグルする関数
     function toggleMenu() {
