@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var initialCameraRotation = { x: 0, y: 0, z: 0 };
     // 画像データを格納する配列
     var imageData = [];
-    var camera = document.getElementById('camera');
+    var cameraEl = document.getElementById('camera'); // `object3D` を取得する前にエレメントを取得
+    var camera = cameraEl ? cameraEl.object3D : null; // 修正：エラー防止
     var currentRotationY = 0; // 現在のカメラのY軸回転角度
 
     // JSONファイルを読み込む処理
@@ -71,39 +72,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // カメラの方向ベクトルを取得する関数
-    function getCameraDirection() {
-        var cameraEl = document.getElementById('camera').object3D;
-        var direction = new THREE.Vector3();
-        cameraEl.getWorldDirection(direction);
-        return direction;
-    }
-
-    // カメラの方向に基づいて東西ボタンのテキストを変更
-    function updateCameraDirection() {
-        var direction = getCameraDirection();
-
-        if (direction.x > 0 && direction.z > 0) {
-            document.getElementById('east-button').innerText = "北";
-            document.getElementById('west-button').innerText = "東";
-        } else if (direction.x > 0 && direction.z < 0) {
-            document.getElementById('east-button').innerText = "東";
-            document.getElementById('west-button').innerText = "南";
-        } else if (direction.x < 0 && direction.z < 0) {
-            document.getElementById('east-button').innerText = "南";
-            document.getElementById('west-button').innerText = "西";
-        } else if (direction.x < 0 && direction.z > 0) {
-            document.getElementById('east-button').innerText = "西";
-            document.getElementById('west-button').innerText = "北";
-        }
-
-        requestAnimationFrame(updateCameraDirection);
-    }
-
-  // ✅ カメラの向きをリアルタイムで取得してログに出力
+    // ✅ カメラの向きをリアルタイムで取得してログに出力
     function logCameraAngle() {
-        var yRotation = THREE.MathUtils.radToDeg(camera.rotation.y); // ラジアンを度に変換
-        console.log(`📌 現在のカメラ角度: ${Math.round(yRotation)}°`);
+        if (camera && camera.rotation) { // 修正: undefined を防ぐ
+            var yRotation = THREE.MathUtils.radToDeg(camera.rotation.y); // ラジアンを度に変換
+            console.log(`📌 現在のカメラ角度: ${Math.round(yRotation)}°`);
+        } else {
+            console.warn("⚠️ カメラの rotation が取得できません");
+        }
         requestAnimationFrame(logCameraAngle);
     }
 
@@ -116,8 +92,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ✅ カメラの回転を設定する関数（`object3D.rotation` を使用）
     function setCameraRotation(yRotation) {
-        console.log(`📌 カメラを ${yRotation}° に回転します`);
-        camera.rotation.y = THREE.MathUtils.degToRad(yRotation); // 修正：度→ラジアン変換
+        if (camera && camera.rotation) {
+            camera.rotation.y = THREE.MathUtils.degToRad(yRotation); // 修正：度→ラジアン変換
+            console.log(`📌 カメラを ${yRotation}° に回転しました`);
+        } else {
+            console.error("❌ カメラの rotation が設定できません！");
+        }
     }
 
     // ✅ 矢印ボタンのクリックイベントを修正
