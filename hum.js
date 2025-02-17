@@ -34,7 +34,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     logCameraAngle(); // 初回実行
 
-    // ✅ カメラの向きを (0,1), (1,0), (1,1), (0,0) のいずれかに設定
+    // ✅ 最も近い90°にスナップする関数
+    function getNearest90Degree(yRotation) {
+        return Math.round(yRotation / 90) * 90 % 360;
+    }
+
+    // ✅ カメラの回転を設定する関数
+    function setCameraRotation(yRotation) {
+        if (camera && camera.rotation) {
+            camera.rotation.y = THREE.MathUtils.degToRad(yRotation); // 修正：度→ラジアン変換
+            console.log(`📌 カメラを ${yRotation}° に回転しました`);
+        } else {
+            console.error("❌ カメラの rotation が設定できません！");
+        }
+    }
+
+    // ✅ west-button / east-button をクリックすると、カメラの x, z の向きを変更する
     function setPredefinedCameraDirection(x, z) {
         if (camera && camera.rotation) {
             let newRotationY;
@@ -72,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 { x: 1, z: 1 },
                 { x: 0, z: 0 }
             ];
-            console.log("数値も変更されました");
             var chosenDirection = directions[Math.floor(Math.random() * directions.length)];
             setPredefinedCameraDirection(chosenDirection.x, chosenDirection.z);
         });
@@ -91,13 +105,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 { x: 1, z: 1 },
                 { x: 0, z: 0 }
             ];
-            console.log("数値も変更されました");
             var chosenDirection = directions[Math.floor(Math.random() * directions.length)];
             setPredefinedCameraDirection(chosenDirection.x, chosenDirection.z);
         });
     } else {
         console.error("❌ east-button が見つかりません！");
     }
+
+    updateCameraDirection();
 
     // メニューをトグルする関数
     function toggleMenu() {
