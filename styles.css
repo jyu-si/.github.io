@@ -223,6 +223,7 @@ body {
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  pointer-events: none; 
 }
 
 /* 左矢印の上に表示するボタン */
