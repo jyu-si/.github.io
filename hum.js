@@ -107,53 +107,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // カメラの回転を設定する関数
     function setCameraRotation(yRotation) {
+        console.log(`📌 カメラを ${yRotation}° に回転します`);
         camera.setAttribute('rotation', { x: 0, y: yRotation, z: 0 });
     }
 
-    // 右ボタン（次に近い東西南北方向に回転）
-    var rotateRightButton = document.getElementById('rotate-right-button');
-    if (rotateRightButton) {
-        rotateRightButton.addEventListener('click', function() {
-            currentRotationY += 45;
-            currentRotationY = getNearest90Degree(currentRotationY);
-            setCameraRotation(currentRotationY);
-        });
-    } else {
-        console.error("rotate-right-button が見つかりません！");
-    }
-
-    // 左ボタン（前の東西南北方向に回転）
-    var rotateLeftButton = document.getElementById('rotate-left-button');
-    if (rotateLeftButton) {
-        rotateLeftButton.addEventListener('click', function() {
-            currentRotationY -= 45;
-            currentRotationY = getNearest90Degree(currentRotationY);
-            setCameraRotation(currentRotationY);
-        });
-    } else {
-        console.error("rotate-left-button が見つかりません！");
-    }
-
-    // ✅ 東西ボタンのデバッグログを追加
+    // ✅ 矢印ボタンをクリックすると最も近い象限境界にスナップする
     var westButton = document.getElementById('west-button');
     var eastButton = document.getElementById('east-button');
 
     if (westButton) {
         westButton.addEventListener('click', function() {
-            var direction = getCameraDirection();
-            console.log("西ボタンがクリックされました", direction);
+            console.log("⬅️ 西ボタンがクリックされました");
+            currentRotationY -= 45; // 45° 回転
+            currentRotationY = getNearest90Degree(currentRotationY); // 90°にスナップ
+            setCameraRotation(currentRotationY);
         });
     } else {
-        console.error("west-button が見つかりません！");
+        console.error("❌ west-button が見つかりません！");
     }
 
     if (eastButton) {
         eastButton.addEventListener('click', function() {
-            var direction = getCameraDirection();
-            console.log("東ボタンがクリックされました", direction);
+            console.log("➡️ 東ボタンがクリックされました");
+            currentRotationY += 45; // 45° 回転
+            currentRotationY = getNearest90Degree(currentRotationY); // 90°にスナップ
+            setCameraRotation(currentRotationY);
         });
     } else {
-        console.error("east-button が見つかりません！");
+        console.error("❌ east-button が見つかりません！");
     }
 
     updateCameraDirection();
