@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // 初期画像のIDを設定
-    var initialImage = '松延研究室'; // 初期画像のIDを保存
+    var initialImage = 'デザイングループ'; // 初期画像のIDを保存
     var currentImage = initialImage;
     // 初期カメラの位置と向きを保存
     var initialCameraPosition = { x: 0, y: 1.6, z: 0 };
