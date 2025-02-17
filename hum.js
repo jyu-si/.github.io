@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 { x: 1, z: 1 },
                 { x: 0, z: 0 }
             ];
+            console.log("数値も変更されました");
             var chosenDirection = directions[Math.floor(Math.random() * directions.length)];
             setPredefinedCameraDirection(chosenDirection.x, chosenDirection.z);
         });
@@ -90,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 { x: 1, z: 1 },
                 { x: 0, z: 0 }
             ];
+            console.log("数値も変更されました");
             var chosenDirection = directions[Math.floor(Math.random() * directions.length)];
             setPredefinedCameraDirection(chosenDirection.x, chosenDirection.z);
         });
