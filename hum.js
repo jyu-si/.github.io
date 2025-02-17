@@ -100,18 +100,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // **右ボタン（次に近い東西南北方向に回転）**
-    document.getElementById('rotate-right-button').addEventListener('click', function() {
-        currentRotationY += 45; // 45° ずつ増やして境界を超えたら調整
-        currentRotationY = getNearest90Degree(currentRotationY);
-        setCameraRotation(currentRotationY);
-    });
+    var rotateRightButton = document.getElementById('rotate-right-button');
+    if (rotateRightButton) {
+        rotateRightButton.addEventListener('click', function() {
+            currentRotationY += 45; // 45° ずつ増やして境界を超えたら調整
+            currentRotationY = getNearest90Degree(currentRotationY);
+            setCameraRotation(currentRotationY);
+        });
+    } else {
+        console.error("rotate-right-button が見つかりません！");
+    }
 
     // **左ボタン（前の東西南北方向に回転）**
-    document.getElementById('rotate-left-button').addEventListener('click', function() {
-        currentRotationY -= 45; // 45° ずつ減らして境界を超えたら調整
-        currentRotationY = getNearest90Degree(currentRotationY);
-        setCameraRotation(currentRotationY);
-    });
+    var rotateLeftButton = document.getElementById('rotate-left-button');
+    if (rotateLeftButton) {
+        rotateLeftButton.addEventListener('click', function() {
+            currentRotationY -= 45; // 45° ずつ減らして境界を超えたら調整
+            currentRotationY = getNearest90Degree(currentRotationY);
+            setCameraRotation(currentRotationY);
+        });
+    } else {
+        console.error("rotate-left-button が見つかりません！");
+    }
 
     updateCameraDirection();
 
@@ -136,4 +146,15 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('DOMContentLoaded', function() {
         setupDirectionButtons();
     });
+
+    // **ハンバーガーメニューの修正**
+    var menuButton = document.querySelector('.openbtn4');
+    if (menuButton) {
+        menuButton.addEventListener('click', function() {
+            menuButton.classList.toggle('active');
+            document.getElementById('button-container').classList.toggle('show');
+        });
+    } else {
+        console.error("メニューボタン (.openbtn4) が見つかりません！");
+    }
 });
