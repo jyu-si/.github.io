@@ -10,15 +10,34 @@ document.addEventListener('DOMContentLoaded', function() {
     var camera = document.getElementById('camera');
     var currentRotationY = 0; // 現在のカメラのY軸回転角度
 
-    // JSONファイルを読み込む処理
+    // 画像を読み込む関数を定義（関数を適切な位置に配置）
+    function loadImage(id) {
+        var image = imageData.find(img => img.id === id);
+        if (image) {
+            document.getElementById('image').setAttribute('src', image.src);
+            document.getElementById('id-text').setAttribute('value', image.id);
+            document.getElementById('label-text').setAttribute('value', image.label);
+        } else {
+            console.error('画像の読み込みに失敗しました: ', id);
+        }
+    }
+    
+    // JSONデータを取得し、画像を設定
     fetch('data.json')
-      .then(response => response.json())
-      .then(data => {
-        imageData = data.images;  // JSONデータを配列に格納
-        setupButtons();           // ボタンをセットアップ
-        loadImage(currentImage);  // 初期画像を表示
-      })
-      .catch(error => console.error('Error:', error));
+        .then(response => response.json())
+        .then(data => {
+            imageData = data.images;
+            setupButtons();
+    
+            // `loadImage()` が定義されていることを確認
+            if (typeof loadImage === 'function') {
+                loadImage(currentImage);
+            } else {
+                console.error("loadImage 関数が見つかりません！");
+            }
+        })
+        .catch(error => console.error('Error:', error));
+
 
     // ボタンを動的に生成する関数
     function setupButtons() {
@@ -64,17 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return direction;
     }
 
-    // 画像を読み込む関数を定義
-function loadImage(id) {
-    var image = imageData.find(img => img.id === id);
-    if (image) {
-        document.getElementById('image').setAttribute('src', image.src);
-        document.getElementById('id-text').setAttribute('value', image.id);
-        document.getElementById('label-text').setAttribute('value', image.label);
-    } else {
-        console.error('画像の読み込みに失敗しました: ', id);
-    }
-}
+
 
 
     // **カメラの方向に基づいて東西ボタンのテキストを変更**
