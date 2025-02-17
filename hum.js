@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var initialCameraRotation = { x: 0, y: 0, z: 0 };
     // 画像データを格納する配列
     var imageData = [];
-    var camera = document.getElementById('camera');
+    var cameraEl = document.getElementById('camera'); // `object3D` を取得する前にエレメントを取得
+    var camera = cameraEl ? cameraEl.object3D : null; // 修正：エラー防止
     var currentRotationY = 0; // 現在のカメラのY軸回転角度
 
     // JSONファイルを読み込む処理
@@ -20,143 +21,81 @@ document.addEventListener('DOMContentLoaded', function() {
       })
       .catch(error => console.error('データの読み込みエラー:', error));
 
-    // ボタンを動的に生成する関数
-    function setupButtons() {
-        var buttonContainer = document.getElementById('button-container');
-        buttonContainer.innerHTML = ''; // 既存のボタンをクリア
-        imageData.forEach(image => {
-            var button = document.createElement('button');
-            button.className = 'switch-button';
-            button.innerText = image.label;
-            button.onclick = () => {
-                switchImage(image.id);
-                toggleMenu();
-            };
-            buttonContainer.appendChild(button);
-        });
-    }
-
-    // 画像を切り替える関数
-    function switchImage(id) {
-        var image = imageData.find(img => img.id === id);
-        if (image) {
-            document.getElementById('image').setAttribute('src', image.src);
-    
-            var idText = document.getElementById('id-text');
-            var labelText = document.getElementById('label-text');
-    
-            if (idText && labelText) {
-                idText.setAttribute('value', image.id);
-                labelText.setAttribute('value', image.label);
-            } else {
-                console.error('id-text または label-text 要素が見つかりません');
-            }
-    
-            currentImage = id;
-        }
-    }
-
-    // 画像を読み込む関数
-    function loadImage(id) {
-        console.log("現在の ID:", id);
-        console.log("利用可能な ID:", imageData.map(img => img.id));
-
-        var image = imageData.find(img => img.id === id);
-        if (image) {
-            document.getElementById('image').setAttribute('src', image.src);
-            document.getElementById('id-text').setAttribute('value', image.id);
-            document.getElementById('label-text').setAttribute('value', image.label);
+    // ✅ カメラの向きをリアルタイムで取得してログに出力
+    function logCameraAngle() {
+        if (camera && camera.rotation) { // 修正: undefined を防ぐ
+            var yRotation = THREE.MathUtils.radToDeg(camera.rotation.y); // ラジアンを度に変換
+            console.log(`📌 現在のカメラ角度: ${Math.round(yRotation)}°`);
         } else {
-            console.error('画像の読み込みに失敗しました: ', id);
+            console.warn("⚠️ カメラの rotation が取得できません");
+        }
+        requestAnimationFrame(logCameraAngle);
+    }
+
+    logCameraAngle(); // 初回実行
+
+    // ✅ カメラの向きを (0,1), (1,0), (1,1), (0,0) のいずれかに設定
+    function setPredefinedCameraDirection(x, z) {
+        if (camera && camera.rotation) {
+            let newRotationY;
+            if (x === 0 && z === 1) {
+                newRotationY = 0;  // 北向き
+            } else if (x === 1 && z === 0) {
+                newRotationY = 90; // 東向き
+            } else if (x === 1 && z === 1) {
+                newRotationY = 45; // 北東向き
+            } else if (x === 0 && z === 0) {
+                newRotationY = 180; // 南向き
+            } else {
+                console.warn("⚠️ 不正なカメラ向きが指定されました");
+                return;
+            }
+            camera.rotation.y = THREE.MathUtils.degToRad(newRotationY);
+            console.log(`📌 カメラの向きを変更: (${x}, ${z}) → ${newRotationY}°`);
+        } else {
+            console.error("❌ カメラの rotation が設定できません！");
         }
     }
 
-    // カメラの方向ベクトルを取得する関数
-    function getCameraDirection() {
-        var cameraEl = document.getElementById('camera').object3D;
-        var direction = new THREE.Vector3();
-        cameraEl.getWorldDirection(direction);
-        return direction;
-    }
-
-    // カメラの方向に基づいて東西ボタンのテキストを変更
-    function updateCameraDirection() {
-        var direction = getCameraDirection();
-
-        if (direction.x > 0 && direction.z > 0) {
-            document.getElementById('east-button').innerText = "北";
-            document.getElementById('west-button').innerText = "東";
-        } else if (direction.x > 0 && direction.z < 0) {
-            document.getElementById('east-button').innerText = "東";
-            document.getElementById('west-button').innerText = "南";
-        } else if (direction.x < 0 && direction.z < 0) {
-            document.getElementById('east-button').innerText = "南";
-            document.getElementById('west-button').innerText = "西";
-        } else if (direction.x < 0 && direction.z > 0) {
-            document.getElementById('east-button').innerText = "西";
-            document.getElementById('west-button').innerText = "北";
-        }
-
-        requestAnimationFrame(updateCameraDirection);
-    }
-
-    // 最も近い90°にスナップする関数
-    function getNearest90Degree(yRotation) {
-        return Math.round(yRotation / 90) * 90 % 360;
-    }
-
-    // カメラの回転を設定する関数
-    function setCameraRotation(yRotation) {
-        camera.setAttribute('rotation', { x: 0, y: yRotation, z: 0 });
-    }
-
-    // 右ボタン（次に近い東西南北方向に回転）
-    var rotateRightButton = document.getElementById('rotate-right-button');
-    if (rotateRightButton) {
-        rotateRightButton.addEventListener('click', function() {
-            currentRotationY += 45;
-            currentRotationY = getNearest90Degree(currentRotationY);
-            setCameraRotation(currentRotationY);
-        });
-    } else {
-        console.error("rotate-right-button が見つかりません！");
-    }
-
-    // 左ボタン（前の東西南北方向に回転）
-    var rotateLeftButton = document.getElementById('rotate-left-button');
-    if (rotateLeftButton) {
-        rotateLeftButton.addEventListener('click', function() {
-            currentRotationY -= 45;
-            currentRotationY = getNearest90Degree(currentRotationY);
-            setCameraRotation(currentRotationY);
-        });
-    } else {
-        console.error("rotate-left-button が見つかりません！");
-    }
-
-    // ✅ 東西ボタンのデバッグログを追加
+    // ✅ 矢印ボタンのクリックイベントを修正
     var westButton = document.getElementById('west-button');
     var eastButton = document.getElementById('east-button');
 
     if (westButton) {
         westButton.addEventListener('click', function() {
-            var direction = getCameraDirection();
-            console.log("西ボタンがクリックされました", direction);
+            console.log("⬅️ 西ボタンがクリックされました");
+
+            // ランダムに (0,1), (1,0), (1,1), (0,0) のいずれかを選択
+            var directions = [
+                { x: 0, z: 1 },
+                { x: 1, z: 0 },
+                { x: 1, z: 1 },
+                { x: 0, z: 0 }
+            ];
+            var chosenDirection = directions[Math.floor(Math.random() * directions.length)];
+            setPredefinedCameraDirection(chosenDirection.x, chosenDirection.z);
         });
     } else {
-        console.error("west-button が見つかりません！");
+        console.error("❌ west-button が見つかりません！");
     }
 
     if (eastButton) {
         eastButton.addEventListener('click', function() {
-            var direction = getCameraDirection();
-            console.log("東ボタンがクリックされました", direction);
+            console.log("➡️ 東ボタンがクリックされました");
+
+            // ランダムに (0,1), (1,0), (1,1), (0,0) のいずれかを選択
+            var directions = [
+                { x: 0, z: 1 },
+                { x: 1, z: 0 },
+                { x: 1, z: 1 },
+                { x: 0, z: 0 }
+            ];
+            var chosenDirection = directions[Math.floor(Math.random() * directions.length)];
+            setPredefinedCameraDirection(chosenDirection.x, chosenDirection.z);
         });
     } else {
-        console.error("east-button が見つかりません！");
+        console.error("❌ east-button が見つかりません！");
     }
-
-    updateCameraDirection();
 
     // メニューをトグルする関数
     function toggleMenu() {
