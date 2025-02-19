@@ -5,7 +5,6 @@
   <title>testkita</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 <body>
   <!-- スタート画面のコンテナ -->
@@ -50,14 +49,13 @@
     <div class="arrow-clippath right-arrow"></div>
     <button id="east-button" class="direction-button">東</button>
 
-    <!-- 追加: カメラ回転ボタン -->
-    <button id="rotate-left-button" class="rotate-button">◀</button>
-    <button id="rotate-right-button" class="rotate-button">▶</button>
 
+
+    
     <a-scene>
       <a-sky id="image" src="1214820_m.jpg"></a-sky>
       <a-entity id="camera-wrapper">
-        <a-camera id="camera" position="0 1.6 0" look-controls="false"></a-camera>
+        <a-camera id="camera" position="0 1.6 0"></a-camera>
       </a-entity>
       <a-entity position="0 2.8 -2">
         <!-- テキストの背景として透明度50%の白いプレーンを追加 -->
