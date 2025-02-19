@@ -5,10 +5,20 @@ document.addEventListener('DOMContentLoaded', function() {
     var initialCameraRotation = { x: 0, y: 0, z: 0 };
     var imageData = [];
     var cameraEl = document.getElementById('camera');
-    var camera = cameraEl ? cameraEl.object3D : null;
+    var camera = null; // 初期化前に `null` に設定
     var currentRotationY = 0;
 
-    // ✅ JSONデータの読み込みとエラーハンドリング
+    if (!cameraEl) {
+        console.error("❌ `cameraEl` が見つかりません！");
+        return;
+    }
+
+    cameraEl.addEventListener('loaded', function () {
+        console.log("✅ A-Frame のカメラがロードされました！");
+        camera = cameraEl.object3D;
+    });
+
+    // ✅ JSONデータの読み込み
     fetch('data.json')
         .then(response => response.json())
         .then(data => {
@@ -18,23 +28,19 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('データの読み込みエラー:', error));
 
-    // ✅ ボタンを動的に生成する関数
-    function setupButtons() {
-        var buttonContainer = document.getElementById('button-container');
-        buttonContainer.innerHTML = '';
-        imageData.forEach(image => {
-            var button = document.createElement('button');
-            button.className = 'switch-button';
-            button.innerText = image.label;
-            button.onclick = () => {
-                switchImage(image.id);
-                toggleMenu();
-            };
-            buttonContainer.appendChild(button);
-        });
+    // ✅ 画像を読み込む関数
+    function loadImage(id) {
+        var image = imageData.find(img => img.id === id);
+        if (image) {
+            document.getElementById('image').setAttribute('src', image.src);
+            document.getElementById('id-text').setAttribute('value', image.id);
+            document.getElementById('label-text').setAttribute('value', image.label);
+        } else {
+            console.error(`❌ 画像の読み込みに失敗しました: ${id}`);
+        }
     }
 
-    // ✅ カメラの向きをリアルタイムで取得してログに出力
+    // ✅ カメラの向きをリアルタイムでログに出力
     function logCameraAngle() {
         if (camera && camera.rotation) {
             var yRotation = THREE.MathUtils.radToDeg(camera.rotation.y);
@@ -48,12 +54,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ✅ `look-controls` を一時的に無効化してからカメラの向きを変更
     function setCameraRotation(yRotation) {
-        if (cameraEl) {
+        if (cameraEl && camera) {
             cameraEl.removeAttribute('look-controls');
             camera.rotation.y = THREE.MathUtils.degToRad(yRotation);
             console.log(`📌 カメラを ${yRotation}° に回転しました`);
 
-            // 100ms 後に `look-controls` を再有効化
             setTimeout(() => {
                 cameraEl.setAttribute('look-controls', '');
             }, 100);
@@ -62,31 +67,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // ✅ カメラの方向に基づいて東西ボタンのテキストを変更
-    function updateCameraDirection() {
-        var direction = getCameraDirection();
-
-        if (direction.x > 0 && direction.z > 0) {
-            document.getElementById('east-button').innerText = "北";
-            document.getElementById('west-button').innerText = "東";
-        } else if (direction.x > 0 && direction.z < 0) {
-            document.getElementById('east-button').innerText = "東";
-            document.getElementById('west-button').innerText = "南";
-        } else if (direction.x < 0 && direction.z < 0) {
-            document.getElementById('east-button').innerText = "南";
-            document.getElementById('west-button').innerText = "西";
-        } else if (direction.x < 0 && direction.z > 0) {
-            document.getElementById('east-button').innerText = "西";
-            document.getElementById('west-button').innerText = "北";
-        }
-
-        requestAnimationFrame(updateCameraDirection);
-    }
-    updateCameraDirection();
-
     // ✅ west-button / east-button をクリックすると、カメラの x, z の向きを変更する
     function setPredefinedCameraDirection(x, z) {
-        if (cameraEl) {
+        if (cameraEl && camera) {
             cameraEl.removeAttribute('look-controls');
 
             let newRotationY;
@@ -135,13 +118,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // メニューをトグルする関数
+    // ✅ メニューをトグルする関数
     function toggleMenu() {
         document.querySelector('.openbtn4').classList.toggle('active');
         document.getElementById('button-container').classList.toggle('show');
     }
 
-    // 方向ボタンのセットアップ関数
+    // ✅ 方向ボタンのセットアップ関数
     function setupDirectionButtons() {
         fetch('data.json')
         .then(response => response.json())
