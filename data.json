@@ -20,26 +20,26 @@
     },
     {
       "id": "人間中心設計研",
-      "src": "605410941.885130.jpg",
+      "src": "matunobe1.jpg.jpg",
       "label": "松延研究室",
       "url": "https://web.wakayama-u.ac.jp/~matunobe/index.html"
     }
   ],
   "directions": {
     "east": {
-      "id": "東",
+      "id": "",
       "description": "これは東方向の説明です"
     },
     "west": {
-      "id": "西",
+      "id": "",
       "description": "これは西方向の説明です"
     },
     "south": {
-      "id": "南",
+      "id": "",
       "description": "これは南方向の説明です"
     },
     "north": {
-      "id": "北",
+      "id": "",
       "description": "これは北方向の説明です"
     }
   }
