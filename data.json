@@ -1,17 +1,11 @@
 {
   "images": [
     {
-      "id": "視覚メディア研",
-      "src": "tokoi.jpg",
-      "label": "視覚メディア研究室",
-      "url": "https://researchers.center.wakayama-u.ac.jp/html/100000632_ja.html"
-    },
-    {
-      "id": "情報環境研究室",
-      "src": "VRRoom.jpg",
-      "label": "情報環境研究室",
-      "url": "https://researchers.center.wakayama-u.ac.jp/html/100000632_ja.html"
-    },
+      "id": "人間中心設計研",
+      "src": "matunobe1.jpg",
+      "label": "ヒューマンセンタードデザイン研究室",
+      "url": "https://web.wakayama-u.ac.jp/~matunobe/index.html"
+    }
     {
       "id": "メディアインテリジェンス研",
       "src": "nisimura.jpg",
@@ -19,11 +13,17 @@
       "url": "https://mdi-lab.sys.wakayama-u.ac.jp/"
     },
     {
-      "id": "人間中心設計研",
-      "src": "matunobe1.jpg",
-      "label": "ヒューマンセンタードデザイン研究室",
-      "url": "https://web.wakayama-u.ac.jp/~matunobe/index.html"
-    }
+      "id": "視覚メディア研",
+      "src": "tokoi.jpg",
+      "label": "視覚メディア研究室",
+      "url": "https://researchers.center.wakayama-u.ac.jp/html/100000632_ja.html"
+    },  
+    {
+      "id": "情報環境研究室",
+      "src": "VRRoom.jpg",
+      "label": "情報環境研究室",
+      "url": "https://researchers.center.wakayama-u.ac.jp/html/100000632_ja.html"
+    },
   ],
   "directions": {
     "east": {
