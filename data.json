@@ -1,9 +1,9 @@
 {
   "images": [
     {
-      "id": "視覚メディア研究室",
+      "id": "視覚メディア研",
       "src": "tokoi.jpg",
-      "label": "視覚メディア研",
+      "label": "視覚メディア研究室",
       "url": "https://researchers.center.wakayama-u.ac.jp/html/100000632_ja.html"
     },
     {
@@ -19,9 +19,9 @@
       "url": "https://mdi-lab.sys.wakayama-u.ac.jp/"
     },
     {
-      "id": "人間中心設計研究室",
+      "id": "人間中心設計研",
       "src": "matunobe1.jpg",
-      "label": "人間中心設計研",
+      "label": "人間中心設計研究室",
       "url": "https://web.wakayama-u.ac.jp/~matunobe/index.html"
     }
   ],
