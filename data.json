@@ -3,25 +3,25 @@
     {
       "id": "視覚メディア研",
       "src": "tokoi.jpg",
-      "label": "今井・床井研究室",
+      "label": "視覚メディア研",
       "url": "https://researchers.center.wakayama-u.ac.jp/html/100000632_ja.html"
     },
     {
       "id": "情報環境研究室",
       "src": "VRRoom.jpg",
-      "label": "各研究室兼用",
+      "label": "情報環境研究室",
       "url": "https://researchers.center.wakayama-u.ac.jp/html/100000632_ja.html"
     },
     {
       "id": "メディアインテリジェンス研",
       "src": "nisimura.jpg",
-      "label": "西村研究室",
+      "label": "メディアインテリジェンス研",
       "url": "https://mdi-lab.sys.wakayama-u.ac.jp/"
     },
     {
       "id": "人間中心設計研",
       "src": "matunobe1.jpg",
-      "label": "松延研究室",
+      "label": "間中心設計研",
       "url": "https://web.wakayama-u.ac.jp/~matunobe/index.html"
     }
   ],
