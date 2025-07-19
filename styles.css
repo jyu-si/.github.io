@@ -8,7 +8,7 @@ body {
 /* スタート画面のスタイル */
 .start-screen {
   background-color: #E0F7FA;
-  position: fixed;
+  position: static;
   width: 100%;
   height: 100vh;
   display: flex;
