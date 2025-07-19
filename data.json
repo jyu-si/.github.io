@@ -1,30 +1,31 @@
 {
-  "images": [
-    {
-      "id": "視覚メディア研",
-      "src": "tokoi.jpg",
-      "label": "今井・床井研究室",
-      "url": "https://researchers.center.wakayama-u.ac.jp/html/100000632_ja.html"
-    },
-    {
-      "id": "情報環境研究室",
-      "src": "VRRoom.jpg",
-      "label": "各研究室兼用",
-      "url": "https://marina.sys.wakayama-u.ac.jp/~tokoi/"
-    },
-    {
-      "id": "メディアインテリジェンス研",
-      "src": "nisimura.jpg",
-      "label": "西村研究室",
-      "url": "https://mdi-lab.sys.wakayama-u.ac.jp/"
-    },
-    {
-      "id": "デザイングループ",
-      "src": "matunobe1.jpg",
-      "label": "松延研究室",
-      "url": "https://web.wakayama-u.ac.jp/~matunobe/index.html"
-    }
-  ],
+"images": [
+  {
+    "id": "デザイングループ",
+    "src": "matunobe1.jpg",
+    "label": "松延研究室",
+    "url": "https://web.wakayama-u.ac.jp/~matunobe/index.html"
+  },
+  {
+    "id": "メディアインテリジェンス研",
+    "src": "nisimura.jpg",
+    "label": "西村研究室",
+    "url": "https://mdi-lab.sys.wakayama-u.ac.jp/"
+  },
+  {
+    "id": "情報環境研究室",
+    "src": "VRRoom.jpg",
+    "label": "各研究室兼用",
+    "url": "https://marina.sys.wakayama-u.ac.jp/~tokoi/"
+  },
+  {
+    "id": "視覚メディア研",
+    "src": "tokoi.jpg",
+    "label": "今井・床井研究室",
+    "url": "https://researchers.center.wakayama-u.ac.jp/html/100000632_ja.html"
+  }
+],
+
   "directions": {
     "east": {
       "id": "東",
