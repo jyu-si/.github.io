@@ -1,7 +1,7 @@
 let currentIndex = 0;
 let images = [];
 
-const initialImageId = 'ヒューマンセンタードデザイン研';
+const initialImageId = 'ヒューマンセンタードデザイン研究室';
 let currentImage = initialImageId;
 
 // 画像とラベルのデータを読み込み
