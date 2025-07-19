@@ -8,14 +8,17 @@ body {
 /* スタート画面のスタイル */
 .start-screen {
   background-color: #E0F7FA;
-  position: fixed;
-  width: 100%;
-  height: 100vh;
+  position: relative; /* fixedをやめる */
+  min-height: 100vh;  /* スマホ対応 */
+  padding: 20px;      /* 余白を確保 */
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* 上詰め */
   align-items: center;
+  overflow-y: auto;   /* スクロール可能にする */
 }
+
 
 .start-title {
   font-size: 48px;
@@ -41,15 +44,18 @@ body {
 }
 
 .start-button {
-  padding: 20px 40px;
-  font-size: 24px;
+  padding: 16px 32px;
+  font-size: 20px;
   background-color: #008CBA;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px;
+  position: sticky;
+  bottom: 10px;
+  z-index: 10;
 }
+
 
 .start-button:hover {
   background-color: #007bb5;
