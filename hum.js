@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 各ラベルに対応するボタンを生成
             var button = document.createElement('button');
             button.className = 'switch-button';
-            button.innerText = image.label;  // ボタンには "label" を使用
+            button.innerText = image.id;  // ボタンには data.jsonの"id" を使用
             button.onclick = () => {
                 switchImage(image.id);
                 toggleMenu();  // 研究室選択時にメニューを閉じる
