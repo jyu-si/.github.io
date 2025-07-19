@@ -1,157 +1,65 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>testkita</title>
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <!-- スタート画面のコンテナ -->
-  <div id="start-screen" class="start-screen">
-    <!-- タイトル -->
-    <div class="start-title">研究室ツアー</div>
-    
-    <!-- 使い方を記入するための長方形コンテナ -->
-    <div class="instructions-container">
-      <div class="instructions-title">使い方</div>
-      <div class="instructions-text">
-        ・スマホを縦持ちにして好きな方向に向けることで研究室を360°見回すことができます<br>
-        ・左上のメニューから気になる研究室を選んでみてください<br>
-        ・"ホームページ"ボタン：研究室のホームページに飛ぶことができます<br>
-        ・"視点リセット"ボタン：最初の視点の方向に戻ります
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>研究室ツアー</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="hum.js" defer></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- スタート画面 -->
+    <div class="start-screen" id="startScreen">
+      <h1 class="start-title">研究室ツアー</h1>
+
+      <div class="instructions-container">
+        <h2 class="instructions-title">使い方</h2>
+        <p class="instructions-text">
+          ボタンを押すことで、360度写真内を移動できます。画面をドラッグして周囲を見渡せます。
+        </p>
       </div>
+
+      <!-- 研究室紹介 -->
+      <div class="instructions-container">
+        <h2 class="instructions-title">紹介研究室について</h2>
+        <p class="instructions-text">
+          紹介研究室はメディアデザインメジャーの研究室から、取り組みにご賛同いただいた４研究室となっています。３６０度写真の撮影協力などご協力いただきました。ありがとうございました。
+        </p>
+      </div>
+
+      <!-- 制作者について -->
+      <div class="instructions-container">
+        <h2 class="instructions-title">制作者について</h2>
+        <p class="instructions-text">
+          この研究室紹介は、ヒューマンインタフェースデザイン研究室の北村周仁が作成しました。きっかけは紹介です。
+        </p>
+      </div>
+
+      <button class="start-button" id="startButton">開始する</button>
     </div>
 
-    
-        <!-- 紹介研究室について -->
-    <div class="instructions-container" style="margin-top: 20px;">
-      <div class="instructions-title">紹介研究室について</div>
-      <div class="instructions-text">
-        紹介研究室はメディアデザインメジャーの研究室から、取り組みにご賛同いただいた４研究室となっています。<br>
-        ３６０度写真の撮影協力などご協力いただきました。ありがとうございました。
-      </div>
-    </div>
-    
-    <!-- 制作者について -->
-    <div class="instructions-container" style="margin-top: 20px;">
-      <div class="instructions-title">制作者について</div>
-      <div class="instructions-text">
-        この研究室紹介は、ヒューマンインタフェースデザイン研究室の北村周仁が作成しました。<br>
-        きっかけは紹介です。
-      </div>
-    </div>
+    <!-- A-Frameのキャンバス -->
+    <a-scene id="vrScene" class="hidden">
+      <a-assets>
+        <!-- 各画像とフォントをhum.jsで追加 -->
+      </a-assets>
+      <a-entity id="image360" geometry="primitive: sphere; radius: 5000; segmentsWidth: 64; segmentsHeight: 64" material="shader: flat; side: back;"></a-entity>
+      <a-camera id="camera" position="0 1.6 0" wasd-controls-enabled="false" look-controls="enabled: true"></a-camera>
+    </a-scene>
 
-
-    <!-- スタートボタン -->
-    <button id="start-button" class="start-button">スタート</button>
-  </div>
-  
-  <div id="content-container" class="hidden">
-    <div class="openbtn4">
+    <!-- ハンバーガーボタン -->
+    <div class="openbtn4" id="hamburgerBtn">
       <span></span><span></span><span></span>
     </div>
-    
-    <div class="button-container" id="button-container">
-      <!-- ボタンがここに動的に追加されます -->
-    </div>
-    
-    <!-- URLボタンコンテナ -->
-    <div class="url-button-container">
-      <button id="reset-button" class="url-button">視点リセット</button>
-      <button id="home-button" class="url-button">ホームページ</button>
+
+    <!-- 研究室切り替えボタン -->
+    <div class="button-container" id="buttonContainer">
+      <!-- JavaScriptで動的に生成 -->
     </div>
 
-    <!-- 左右矢印を追加 -->
-    <div class="arrow-clippath left-arrow"></div>
-    <button id="west-button" class="direction-button">西</button>
-    
-    <div class="arrow-clippath right-arrow"></div>
-    <button id="east-button" class="direction-button">東</button>
-
-
-
-    
-    <a-scene>
-      <a-sky id="image" src="matunobe1.jpg"></a-sky>
-      <a-entity id="camera-wrapper">
-        <a-camera id="camera" position="0 1.6 0"></a-camera>
-      </a-entity>
-      <a-entity position="0 2.8 -2">
-        <!-- テキストの背景として透明度50%の白いプレーンを追加 -->
-        <a-plane color="#FFFFFF" opacity="0.35" width="3.5" height="1.5" position="0 0.1 -0.01"></a-plane>
-  
-        <!-- idのテキスト -->
-        <a-text id="id-text" 
-                value="ヒューマンセンタードデザイン研究室"
-                align="center" 
-                color="#000000" 
-                width="6" 
-                font="KTEGAKI-msdf.json" 
-                font-image="KTEGAKI.png" 
-                negate="false" 
-                scale="2 2 1" 
-                position="0 0.3 0">
-        </a-text>
-  
-        <!-- labelのテキスト -->
-        <a-text id="label-text" 
-                value="松延研究室"  
-                align="center" 
-                color="#000000" 
-                width="4"  
-                font="KTEGAKI-msdf.json" 
-                font-image="KTEGAKI.png" 
-                negate="false" 
-                scale="1.2 1.2 1"  
-                position="1.0 -0.2 0">
-        </a-text>
-      </a-entity>
-    </a-scene>
-  </div>
-  
-<script src="hum.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // スタートボタンのクリックイベント
-        document.getElementById('start-button').onclick = function() {
-            document.getElementById('start-screen').classList.add('hidden');
-            document.getElementById('content-container').classList.remove('hidden');
-
-            // コンテンツが表示された後に視点リセットとホームページボタンの初期化を行う
-            initializeContent();
-        };
-    });
-
-    function initializeContent() {
-        var resetButton = document.getElementById('reset-button');
-        var homeButton = document.getElementById('home-button');
-
-        if (resetButton) {
-            resetButton.addEventListener('click', function() {
-                resetView();
-            });
-        }
-
-        if (homeButton) {
-            homeButton.addEventListener('click', function() {
-                window.goToURL();
-            });
-        }
-    }
-
-    function resetView() {
-        var camera = document.getElementById('camera');
-
-        camera.removeAttribute('look-controls');
-
-        camera.setAttribute('position', { x: 0, y: 1.6, z: 0 });
-        camera.setAttribute('rotation', { x: 0, y: 0, z: 0 });
-
-        setTimeout(function() {
-            camera.setAttribute('look-controls', '');
-        }, 100);
-    }
-</script>
-</body>
+    <!-- 東西ボタン -->
+    <div id="west-button" class="direction-button">←</div>
+    <div id="east-button" class="direction-button">→</div>
+  </body>
 </html>
