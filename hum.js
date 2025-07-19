@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     // 初期画像のIDを設定
-    var initialImage = '視覚メディア研'; // 初期画像のIDを保存
+    var initialImage = 'デザイングループ'; // 初期画像のIDを保存
     var currentImage = initialImage;
     // 初期カメラの位置と向きを保存
     var initialCameraPosition = { x: 0, y: 1.6, z: 0 };
     var initialCameraRotation = { x: 0, y: 0, z: 0 };
     // 画像データを格納する配列
-    var imageData = [];
+    var imageData a= [];
 
     // JSONファイルを読み込む処理
     fetch('data.json')
@@ -106,20 +106,20 @@ document.addEventListener('DOMContentLoaded', function() {
         // カメラの方向ベクトルに応じてボタンのテキストを変更
         if (direction.x > 0 && direction.z > 0) {
             // x > 0, z > 0: 北と東
-            document.getElementById('east-button').innerText = ""; //北
-            document.getElementById('west-button').innerText = "";//東
+            document.getElementById('east-button').innerText = "北";
+            document.getElementById('west-button').innerText = "東";
         } else if (direction.x > 0 && direction.z < 0) {
             // x > 0, z < 0: 東と南
-            document.getElementById('east-button').innerText = "";//東
-            document.getElementById('west-button').innerText = "";//南
+            document.getElementById('east-button').innerText = "東";
+            document.getElementById('west-button').innerText = "南";
         } else if (direction.x < 0 && direction.z < 0) {
             // x < 0, z < 0: 南と西
-            document.getElementById('east-button').innerText = "";//南
-            document.getElementById('west-button').innerText = "";//西
+            document.getElementById('east-button').innerText = "南";
+            document.getElementById('west-button').innerText = "西";
         } else if (direction.x < 0 && direction.z > 0) {
             // x < 0, z > 0: 西と北
-            document.getElementById('east-button').innerText = "";//西
-            document.getElementById('west-button').innerText = "";//北
+            document.getElementById('east-button').innerText = "西";
+            document.getElementById('west-button').innerText = "北";
         }
 
         requestAnimationFrame(updateCameraDirection); // 次のフレームで再度取得
