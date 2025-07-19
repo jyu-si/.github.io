@@ -1,249 +1,139 @@
 body {
   margin: 0;
-  overflow: hidden;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #dff8f9;
+  overflow-y: auto;
+  height: auto;
 }
 
-/* スタート画面のスタイル */
+/* スタート画面 */
 .start-screen {
-  background-color: #E0F7FA;
-  position: relative; /* fixedをやめる */
-  min-height: 100vh;  /* スマホ対応 */
-  padding: 20px;      /* 余白を確保 */
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* 上詰め */
-  align-items: center;
-  overflow-y: auto;   /* スクロール可能にする */
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-
+/* タイトル */
 .start-title {
-  font-size: 48px;
+  font-size: 2.5em;
   font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+/* 説明の白い枠 */
+.instructions-container {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
   margin-bottom: 20px;
 }
 
-.instructions-container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
 .instructions-title {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 1.4em;
   margin-bottom: 10px;
 }
 
 .instructions-text {
-  font-size: 16px;
+  font-size: 1em;
+  line-height: 1.6;
 }
 
+/* スタートボタン */
 .start-button {
-  padding: 16px 32px;
-  font-size: 20px;
-  background-color: #008CBA;
+  background-color: #4ecdc4;
   color: white;
   border: none;
-  border-radius: 5px;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border-radius: 8px;
   cursor: pointer;
-  position: sticky;
-  bottom: 10px;
-  z-index: 10;
+  display: block;
+  margin: 30px auto 50px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
 
 .start-button:hover {
-  background-color: #007bb5;
+  background-color: #38bfb2;
 }
 
+/* A-Frameキャンバスが表示されるとき */
 .hidden {
   display: none;
 }
 
-/* ハンバーガーボタンのスタイル */
+/* ハンバーガーメニュー */
 .openbtn4 {
-  position: absolute;
+  position: fixed;
   top: 10px;
   left: 10px;
-  z-index: 2;
-  background: #4CAF50;
+  z-index: 999;
+  display: none;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
-  width: 50px;
-  height: 50px;
-  border-radius: 5px;
 }
 
 .openbtn4 span {
-  display: inline-block;
-  transition: all .4s; /* トランジションのスピードを設定 */
-  position: absolute;
-  left: 14px;
-  height: 2px;
-  border-radius: 5px;
-  background: #fff;
-  width: 45%;
+  display: block;
+  height: 4px;
+  background: #333;
+  margin: 8px 0;
+  border-radius: 2px;
 }
 
-/* 各span要素の位置を調整 */
-.openbtn4 span:nth-of-type(1) {
-  top: 13px; 
-}
-
-.openbtn4 span:nth-of-type(2) {
-  top: 19px;
-}
-
-.openbtn4 span:nth-of-type(3) {
-  top: 25px;
-}
-
-/* メニューラベルの追加 */
-.openbtn4 span:nth-of-type(3)::after {
-  content: "Menu";
-  position: absolute;
-  top: 5px;
-  left: -2px;
-  color: #fff;
-  font-size: 0.6rem;
-  text-transform: uppercase;
-}
-
-/* activeクラスが付与された時のスタイル */
-.openbtn4.active span:nth-of-type(1) {
-  top: 14px;
-  left: 18px;
-  transform: translateY(6px) rotate(-45deg);
-  width: 30%;
-}
-
-.openbtn4.active span:nth-of-type(2) {
-  opacity: 0;
-}
-
-.openbtn4.active span:nth-of-type(3) {
-  top: 26px;
-  left: 18px;
-  transform: translateY(-6px) rotate(45deg);
-  width: 30%;
-}
-
-/* activeクラスが付与された際のラベルを変更 */
-.openbtn4.active span:nth-of-type(3)::after {
-  content: "Close";
-  transform: translateY(0) rotate(-45deg);
-  top: 5px;
-  left: 4px;
-}
-
-/* ボタンコンテナのスタイル */
+/* メニュー用ボタン */
 .button-container {
-  position: absolute;
-  top: 70px;
+  position: fixed;
+  top: 60px;
   left: 10px;
-  z-index: 1;
+  z-index: 998;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 10px;
   display: none;
-  flex-direction: column;
 }
 
-/* コンテナが表示されたときのスタイル */
-.button-container.show {
-  display: flex;
-}
-
-/* スイッチボタンのスタイル */
-.switch-button {
-  margin: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #4CAF50;
+.button-container button {
+  display: block;
+  margin: 5px 0;
+  background-color: #4ecdc4;
   color: white;
   border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9em;
   cursor: pointer;
-  border-radius: 5px;
 }
 
-/* スイッチボタンのホバー時のスタイル */
-.switch-button:hover {
-  background-color: #45a049;
+.button-container button:hover {
+  background-color: #38bfb2;
 }
 
-/* URLボタンコンテナのスタイル */
-.url-button-container {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  z-index: 2;
-}
-
-/* URLボタンのスタイル */
-.url-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #008CBA;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-/* URLボタンのホバー時のスタイル */
-.url-button:hover {
-  background-color: #007bb5;
-}
-
-/* 左右矢印のスタイル */
-.left-arrow, .right-arrow {
-  z-index: 999;
-  position: absolute;
-  top: 55%;
-  transform: translateY(-50%);
-  display: inline-block;
-  width: 48px;
-  height: 72px;
-  background-color: #1E88E5;
-}
-
-.left-arrow {
-  left: 0;
-  clip-path: polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%);
-}
-
-.right-arrow {
-  right: 0;
-  clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
-}
-
-/* 矢印の上に配置されるボタン */
+/* 東西ボタン */
 .direction-button {
-  position: absolute;
-  z-index: 1000;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: transparent;
+  position: fixed;
+  bottom: 20px;
+  font-size: 2em;
+  background-color: rgba(0, 0, 0, 0.4);
   color: white;
   border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
   cursor: pointer;
-  border-radius: 5px;
-  pointer-events: auto;  
+  z-index: 1000;
 }
 
-/* 左矢印の上に表示するボタン */
 #west-button {
-  left: 0;
-  top: 55%;
-  transform: translateY(-50%);
-  color: white;
+  left: 20px;
 }
 
-/* 右矢印の上に表示するボタン */
 #east-button {
-  right: 0;
-  top: 55%;
-  transform: translateY(-50%);
-  color: white;
+  right: 20px;
 }
