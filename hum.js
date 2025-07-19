@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var initialCameraPosition = { x: 0, y: 1.6, z: 0 };
     var initialCameraRotation = { x: 0, y: 0, z: 0 };
     // 画像データを格納する配列
-    var imageData a= [];
+    var imageData = [];
 
     // JSONファイルを読み込む処理
     fetch('data.json')
