@@ -9,8 +9,8 @@ body {
 .start-screen {
   background-color: #E0F7FA;
   position: static;
-  width: 90%;
-  height: 90vh;
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
